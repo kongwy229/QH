@@ -4,13 +4,13 @@
           <div class="left">
             <h1>清华大学质量与可靠性研究院相关公告</h1>
             <el-carousel trigger="click" height="500px">
-              <el-carousel-item v-for="(item,index) in imgList" :key="index">
+              <el-carousel-item v-for="item in carousels" :key="item.id">
                 <!-- <h3 class="small"></h3> -->
-                <img height="100%" width="100%" :src="item"/>
+                <img height="100%" width="100%" :src="item.img"/>
               </el-carousel-item>
             </el-carousel>
             <p class="desc">
-              清华大学质量与可靠性研究院（与原国家质检总局共建）致力于先进质量技术和管理体系的研究与应用，协助企业提升产品与服务质量，发展全生命周期的系统保障的理论与技术，提升系统的可信性和可保障性。
+              {{notice}}
             </p>
             <hr/>
           </div>
@@ -18,8 +18,8 @@
             <div class="block" v-for="(item,index) in list" :key="index">
               <div class="title">{{item.title}}</div>
               <ul>
-                <li v-for="(subItem,subIndex) in item.array" :key="subIndex">
-                  <i></i> {{subItem}}
+                <li v-for="subItem in item.array" :key="subItem.id">
+                  <i></i> {{subItem.title}}
                 </li>
               </ul>
             </div>
@@ -38,10 +38,11 @@
             </div> -->
           </div>
       </div>
-      <PeopleInfo></PeopleInfo>
+      <PeopleInfo :experts="experts" :links="links"></PeopleInfo>
   </div>
 </template>
 <script>
+import { baseImgUrl, getHomePage } from '@/apis/index'
 // import NewsBorad from '@/components/web/NewsBorad'
 import PeopleInfo from '@/components/web/PeopleInfo'
 export default {
@@ -51,22 +52,12 @@ export default {
   },
   data () {
     return {
-      imgList: [
-        'https://www.tsinghua.edu.cn/image/banner03.jpg',
-        'https://www.tsinghua.edu.cn/image/banner07.jpg',
-        'https://www.tsinghua.edu.cn/image/banner06.jpg',
-        'https://www.tsinghua.edu.cn/image/banner01.jpg',
-        'https://www.tsinghua.edu.cn/image/banner02.jpg'
-      ],
+      carousels: [],
+      notice: '',
       list: [
         {
           title: '成果',
-          array: [
-            '工物系王哲课题组在液体物理和胶体流变学领域取得重要成果',
-            '深圳国际研究生院张锡辉团队在揭示碳纳米管电极脱盐过程复杂动力学机制上取得新进展',
-            '材料学院研究团队首次实现共价键氮化硅陶瓷室温塑性变形',
-            '环境学院陈吕军团队揭示能-水基础设施共生的降碳、节水与经济效益',
-            '药学院刘刚课题组首次发现一种新型蛋白合成抑制剂的抗肿瘤作用']
+          array: []
         },
         {
           title: '学术活动',
@@ -77,20 +68,36 @@ export default {
             '企业六西格玛质量管理'
           ]
         }
-      ]
+      ],
+      experts: [],
+      links: []
     }
+  },
+  mounted () {
+    getHomePage().then((res) => {
+      this.notice = res.notice
+      console.log(res)
+      this.list[1].array = [...res.achievements]
+      this.list[0].array = [...res.academics]
+      this.experts = [...res.experts]
+      this.links = [...res.links]
+      res.carousels.forEach(item => {
+        item.img = baseImgUrl + item.img
+        this.carousels.push(item)
+      })
+    })
   }
 }
 </script>
 
 <style lang = "less" scoped>
-@light_bgColor:#7e2a8a;
-@dark_bgColor:#46228e;
-@normal_titleColor:#d69909;
+  h1{
+    font-size:1.5rem;
+  }
   .desc {
       width:100%;
       color:#000;
-      font-size:1.2rem;
+      font-size:1.0rem;
       line-height:2;
       font-weight: bold;
   }
@@ -107,7 +114,7 @@ export default {
      width:20%;
       .title{
         color: @dark_bgColor;
-        font-size:1.25rem;
+        font-size:1.0rem;
         font-weight: bolder;
         padding-left: 20px;
         margin: 20px 0;

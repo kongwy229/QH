@@ -18,9 +18,9 @@
             </div>
           </div>
           <div class="cu-right">
-            <img width="800px" src="https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg"/>
+            <img width="800px" src="../../assets/img/local1.png"/>
+            <!-- <img width="800px" src="../../assets/img/local2.png"/> -->
             <hr/>
-            <img width="800px" src="https://www.tsinghua.edu.cn/__local/0/E9/B5/123588172AED93BD0193C0D83FA_DED4F3EB_901C6.jpg"/>
           </div>
         </div>
         <div class="cu-form">
@@ -54,24 +54,9 @@ export default {
       },
       newsList: [
         {
-          title: '从路A出发',
+          title: '地址',
           content: [
-            '威尔希尔大道出口-东',
-            '在Westwood Blvd左转',
-            '沿着校园入口',
-            '如有必要，可在左侧车道附近的停车亭获得停车通行证',
-            '在指定地块停车',
-            '工程建筑位于Westwood Blvd东侧，毗邻停车场9'
-          ]
-        },
-        {
-          title: '从路B出发',
-          content: [
-            '跟随Wilshire进入Westwood',
-            '在Westwood Blvd右转',
-            '沿着校园入口',
-            '如有必要，可在左侧车道附近的停车亭获得停车通行证',
-            '工程建筑位于Westwood Blvd东侧，毗邻停车场'
+            '北京市海淀区双清路77号院4号楼11层1102'
           ]
         }
       ]
@@ -81,13 +66,10 @@ export default {
 </script>
 
 <style lang = "less" scoped>
-@light_bgColor:#7e2a8a;
-@dark_bgColor:#46228e;
-@normal_titleColor:#d69909;
   .desc {
       width:100%;
       color:#000;
-      font-size:1.2rem;
+      font-size:1.0rem;
       line-height:2;
       font-weight: bold;
   }
@@ -97,8 +79,12 @@ export default {
     justify-content: space-between;
     padding-bottom: 40px;
     .cu-left{
-      width:50%;
+      width:60%;
+      h2{
+        font-size:1.0rem;
+      }
       .desc-title{
+        font-size: 1.0rem;
         color: #956609;
       }
     }
@@ -106,7 +92,7 @@ export default {
       color:#000;
       padding-left: 10px;
       height: 2.5rem;
-      font-size: 1.25rem;
+      font-size: 1.0rem;
       line-height: 2.5rem;
     }
     .cu-right{
@@ -118,15 +104,15 @@ export default {
   .form{
     width:50%;
     /deep/.el-form-item__label{
-      font-size:1.25rem;
+      font-size:1.0rem;
       color:#000;
     }
   }
   .button{
-    width: 90%;
-    min-height:50px;
-    line-height: 50px;
-    font-size:1.25rem;
+    width: 80%;
+    min-height:40px;
+    line-height: 40px;
+    font-size:1.0rem;
     text-align: center;
     background: @dark_bgColor;
     color:#fff;
@@ -134,5 +120,11 @@ export default {
   }
   .button:hover{
     background:#7757b9;
+  }
+  h2{
+    font-size: 1.0rem;
+  }
+  h3{
+    font-size: 1.0rem;
   }
 </style>

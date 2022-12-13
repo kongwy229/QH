@@ -9,7 +9,7 @@ const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
-  'element-ui': 'ElementUI',
+  'element-ui': 'ELEMENT',
   // 'mavon-editor': 'mavonEditor',
   axios: 'axios'
 }
@@ -43,7 +43,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://150.158.166.87:8000',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -119,7 +119,7 @@ module.exports = {
       config.entry('app').clear().add('./src/main-dev.js')
       config.plugin('html').tap(args => {
         args[0].cdn = cdn.dev
-        args[0].title = 'Dev-Xanadu'
+        args[0].title = '质量与可靠性研究院官网'
         return args
       })
     })

@@ -76,6 +76,9 @@ export default {
     height:70px;
     color:@dark_bgColor;
     margin-bottom: 10px;
+    h3{
+        font-size:1.0rem;
+    }
     /* span{
         width: 10px;
         display: inline-block; /*第一个装饰线 */
@@ -135,6 +138,9 @@ export default {
         overflow: hidden;
         display: flex;
         justify-content:space-between;
+        h3{
+            font-size:1.0rem;
+        }
         .news-deatil{
             overflow: hidden;
             width:28%;
@@ -148,7 +154,7 @@ export default {
                 transform: rotate(0deg) scale(1.04, 1.04) skew(0deg) translate(0, 0);
             }
             h3{
-                font-size:1.25rem;
+                font-size:1.0rem;
                 font-weight: normal;
                 color: #956609;
                 overflow: hidden;

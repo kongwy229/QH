@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '../views/newsView/index'
 import desc from '../views/newsView/desc'
+import news from '../views/newsView/news'
+import newsDetail from '../views/newsView/newsDetail'
+import research from '../views/newsView/research'
+import nowAnnualMeeting from '../views/newsView/nowAnnualMeeting'
+import development from '../views/newsView/development'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,14 +25,59 @@ const routes = [
     component: desc
   },
   {
+    path: '/development',
+    name: 'development',
+    component: development
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: news
+  },
+  {
+    path: '/news/:cate',
+    name: 'newsCate',
+    component: news
+  },
+  {
+    path: '/news/:cate/:id',
+    name: 'newsDetail',
+    component: newsDetail
+  },
+  {
+    path: '/research',
+    name: 'research',
+    component: research
+  },
+  {
+    path: '/research/:cate',
+    name: 'researchCate',
+    component: research
+  },
+  {
+    path: '/now',
+    name: 'now',
+    component: nowAnnualMeeting
+  },
+  {
     path: '/history',
     name: 'history',
-    component: () => import(/* webpackChunkName: "about" */ '../views/newsView/history.vue')
+    component: () => import(/* webpackChunkName: "history" */ '../views/newsView/historyAM.vue')
+  },
+  {
+    path: '/history/:id',
+    name: 'AMDetail',
+    component: () => import(/* webpackChunkName: "history" */ '../views/newsView/AMDetail.vue')
   },
   {
     path: '/people',
     name: 'people',
     component: () => import(/* webpackChunkName: "people" */ '../views/newsView/people.vue')
+  },
+  {
+    path: '/people/:id',
+    name: 'peopleDetail',
+    component: () => import(/* webpackChunkName: "people" */ '../views/newsView/peopleDetail.vue')
   },
   // {
   //   path: '/news/:id',

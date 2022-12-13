@@ -21,9 +21,12 @@
             <el-menu-item :index="navList[2].path">
               {{navList[2].title}}
             </el-menu-item>
-            <el-menu-item :index="navList[3].path">
-              {{navList[3].title}}
-            </el-menu-item>
+            <el-submenu :index="navList[3].path">
+              <template slot="title">{{navList[3].title}}</template>
+              <el-menu-item  v-for="(subItem) in navList[3].children" :key="subItem.path" :index="subItem.path">
+                {{subItem.title}}
+              </el-menu-item>
+            </el-submenu>
             <el-submenu :index="navList[4].path">
               <template slot="title">{{navList[4].title}}</template>
               <el-menu-item  v-for="(subItem) in navList[4].children" :key="subItem.path" :index="subItem.path">
@@ -60,9 +63,12 @@
           <el-menu-item :index="navList[2].path">
             {{navList[2].title}} <span class="line"> / </span>
           </el-menu-item>
-          <el-menu-item :index="navList[3].path">
-            {{navList[3].title}} <span class="line"> / </span>
-          </el-menu-item>
+          <el-submenu :index="navList[3].path">
+            <template slot="title">{{navList[3].title}} <span class="line"> / </span></template>
+            <el-menu-item  v-for="(subItem) in navList[3].children" :key="subItem.path" :index="subItem.path">
+              {{subItem.title}}
+            </el-menu-item>
+          </el-submenu>
           <el-submenu :index="navList[4].path">
             <template slot="title">{{navList[4].title}} <span class="line"> / </span></template>
             <el-menu-item  v-for="(subItem) in navList[4].children" :key="subItem.path" :index="subItem.path">
@@ -146,87 +152,87 @@ export default {
           children: [
             {
               title: '研究院简介',
-              path: 'desc'
+              path: '/desc'
             },
             {
               title: '发展历程',
-              path: 'history'
+              path: '/development'
             }
           ]
         },
         {
           title: '研究院人员',
-          path: 'people'
+          path: '/people'
         },
         {
           title: '新闻中心',
-          path: 'news',
+          path: '/news',
           children: [
             {
               title: '质量相关政策',
-              path: 'policy'
+              path: '/news/policy'
             },
             {
               title: '通知公告',
-              path: 'notice'
+              path: '/news/notice'
             },
             {
               title: '地方座谈会',
-              path: 'forum'
+              path: '/news/forum'
             },
             {
               title: '企业交流',
-              path: 'communication'
+              path: '/news/communication'
             },
             {
               title: '学术讲座',
-              path: 'lecture'
+              path: '/news/lecture'
             }
           ]
         },
         {
           title: '科学研究',
-          path: 'research',
+          path: '/research',
           children: [
             {
               title: '宏观质量政策研究',
-              path: 'MQPR'
+              path: '/research/MQPR'
             },
             {
               title: '质量管理与控制技术研究',
-              path: 'RQMCT'
+              path: '/research/RQMCT'
             },
             {
               title: '可靠性与保障性研究',
-              path: 'RASR'
+              path: '/research/RASR'
             },
             {
               title: '人因与安全研究',
-              path: 'HFSR'
+              path: '/research/HFSR'
             },
             {
               title: '服务质量研究',
-              path: 'ROSQ'
+              path: '/research/ROSQ'
             }
           ]
         },
         {
           title: '质量院年会',
-          path: 'conference',
+          path: '/conference',
           children: [
             {
               title: '当前年会',
-              path: 'now'
+              path: '/now'
             },
             {
               title: '历年年会',
-              path: 'pass'
+              path: '/history'
             }
           ]
         },
         {
           title: '加入我们',
-          path: 'contactUs'
+          path: '/contactUs'
         }
       ],
       timeList: [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]
@@ -255,9 +261,6 @@ export default {
 </script>
 
 <style lang = "less">
-@light_bgColor:#7e2a8a;
-@dark_bgColor:#46228e;
-@normal_titleColor:#d69909;
 @media screen and (max-width: 1000px) {
   #app {
     .nav{
@@ -273,7 +276,7 @@ export default {
   }
 }
 .header{
-  width: 80%;
+  width: 90%;
   margin: 20px auto 10px;
 }
 .mobile-nav{
@@ -296,8 +299,9 @@ export default {
 .headerR-search {
     display: flex;
     input{
-        height: 40px;
+        height: 30px;
         width: 90%;
+        font-size: 0.8rem;
         padding-left: 10px;
         border: 1px solid @dark_bgColor;
     }
@@ -305,8 +309,11 @@ export default {
         background-color: @dark_bgColor;
         border:1px solid @dark_bgColor;
         border-radius: 0px;
-        height:42px;
+        height:32px;
     }
+}
+.el-button{
+  padding: 5px 20px !important;
 }
 .el-button--primary:focus, .el-button--primary:hover {
     background: #7757b9 !important;
@@ -321,7 +328,7 @@ export default {
 }
 .el-menu--horizontal>.el-submenu .el-submenu__title {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
 }
 .el-menu--horizontal>.el-submenu .el-submenu__title:hover{
   color:@light_bgColor !important;
@@ -331,7 +338,7 @@ export default {
   color: @light_bgColor !important;
 }
 .el-menu-item{
-  font-size:1.2rem !important;
+  font-size:1.0rem !important;
   font-weight: bold !important;
   padding:0px 4px !important;
 }
@@ -345,14 +352,15 @@ export default {
     border-bottom: solid 0px #a19ea2 !important;
 }
 .con{
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 .footer{
-  width:80%;
+  width:90%;
   margin: 80px auto 0px;
   height:150px;
   display: flex;
+  font-size: 0.8rem;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #9a9a9a;
