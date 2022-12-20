@@ -1,15 +1,15 @@
 <template>
       <div>
-        <h2>新闻中心-{{cate[$route.params.cate]}}</h2>
+        <h2>{{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
         <div class="news-con" v-for="item in newsList" :key="item.id">
           <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
           <p class="time">
-            <i class="el-icon-time"></i><span>{{item.time}}</span>
+            <i class="el-icon-time"></i><span>{{item.updateTime}}</span>
             <i class="el-icon-user"></i><span>{{item.author}}</span>
           </p>
           <div class="container">
             <div class="img">
-              <img src="../../assets/img/start.jpg"/>
+              <img :src="item.previewImg? item.previewImg:'../../assets/img/start.jpg'"/>
             </div>
             <div class="desc">
               <p>{{item.desc}}</p>
@@ -18,62 +18,124 @@
           </div>
           <hr/>
         </div>
+        <div class="empty" v-show="newsList.length === 0">
+          当前无数据
+        </div>
       </div>
 </template>
 <script>
+import { getNewsList, baseImgUrl } from '@/apis/index'
 export default {
   name: 'desc',
   data () {
     return {
       isMobile: false,
       cate: {
-        policy: '质量相关政策',
-        notice: '通知公告',
-        forum: '地方座谈会',
-        communication: '企业交流',
-        lecture: '学术讲座'
+        policy: {
+          label: '质量相关政策',
+          key: 1
+        },
+        notice: {
+          label: '通知公告',
+          key: 2
+        },
+        forum: {
+          label: '地方座谈会',
+          key: 3
+        },
+        communication: {
+          label: '企业交流',
+          key: 4
+        },
+        lecture: {
+          label: '学术讲座',
+          key: 5
+        },
+        MQPR: {
+          label: '宏观质量政策研究',
+          key: 6
+        },
+        RQMCT: {
+          label: '质量管理与控制技术研究',
+          key: 7
+        },
+        RASR: {
+          label: '可靠性与保障性研究',
+          key: 8
+        },
+        HFSR: {
+          label: '人因与安全研究',
+          key: 9
+        },
+        ROSQ: {
+          label: '服务质量研究',
+          key: 10
+        }
       },
       newsList: [
-        {
-          id: '1',
-          img: '../../assets/img/start.jpg',
-          title: '美国核管理委员会验证的NGA-East地震地面运动模型',
-          time: '2022年12月3日',
-          author: 'isak',
-          cate: '时事',
-          desc: '美国核管理委员会（NRC）刚刚发布了一份报告，得出结论，NGA东部地面运动特征模型是…'
-        },
-        {
-          id: '2',
-          img: '../../assets/img/start.jpg',
-          title: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖',
-          time: '2022年12月3日',
-          author: 'isak',
-          cate: '时事',
-          desc: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖。'
-        },
-        {
-          id: '3',
-          img: '../../assets/img/start.jpg',
-          title: '研讨会邀请：PRA和NRC风险知情决策：一些趋势和挑战',
-          time: '2022年12月3日',
-          author: 'isak',
-          cate: '时事',
-          desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        },
-        {
-          id: '4',
-          img: '../../assets/img/start.jpg',
-          title: '美国核管理委员会验证的NGA-East地震地面运动模型',
-          time: '2022年12月3日',
-          author: 'isak',
-          cate: '时事',
-          desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        }
+        // {
+        //   id: '1',
+        //   img: '../../assets/img/start.jpg',
+        //   title: '美国核管理委员会验证的NGA-East地震地面运动模型',
+        //   time: '2022年12月3日',
+        //   author: 'isak',
+        //   cate: '时事',
+        //   desc: '美国核管理委员会（NRC）刚刚发布了一份报告，得出结论，NGA东部地面运动特征模型是…'
+        // },
+        // {
+        //   id: '2',
+        //   img: '../../assets/img/start.jpg',
+        //   title: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖',
+        //   time: '2022年12月3日',
+        //   author: 'isak',
+        //   cate: '时事',
+        //   desc: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖。'
+        // },
+        // {
+        //   id: '3',
+        //   img: '../../assets/img/start.jpg',
+        //   title: '研讨会邀请：PRA和NRC风险知情决策：一些趋势和挑战',
+        //   time: '2022年12月3日',
+        //   author: 'isak',
+        //   cate: '时事',
+        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
+        // },
+        // {
+        //   id: '4',
+        //   img: '../../assets/img/start.jpg',
+        //   title: '美国核管理委员会验证的NGA-East地震地面运动模型',
+        //   time: '2022年12月3日',
+        //   author: 'isak',
+        //   cate: '时事',
+        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
+        // }
       ]
     }
   },
+  mounted () {
+    this.getList(this.cate[this.$route.params.cate].key)
+    console.log(this.$route)
+  },
+  watch: {
+    '$route.params.cate': function (v) {
+      this.getList(this.cate[v].key)
+    }
+  },
   methods: {
+    getList (id) {
+      this.newsList = []
+      getNewsList({ category: id })
+        .then((res) => {
+          console.log(res)
+          res.content.forEach((item) => {
+            if (item.previewImg && item.previewImg.indexOf('http') === -1) {
+              item.previewImg = baseImgUrl + item.previewImg
+            }
+            this.newsList.push(item)
+          })
+          // this.newsList = [...res.content]
+        })
+    },
     jumpTo (id) {
       this.$router.push({ name: 'newsDetail', params: { id: id } })
     }
@@ -82,6 +144,12 @@ export default {
 </script>
 
 <style lang = "less" scoped>
+.empty{
+    text-align: center;
+    height: 50vh;
+    color: #666666;
+    line-height: 50vh;
+}
 .news-con{
   margin-bottom:50px;
 }
@@ -154,5 +222,4 @@ p{
 .more:hover{
   color:#000;
 }
-
 </style>

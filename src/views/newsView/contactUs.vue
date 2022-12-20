@@ -3,14 +3,11 @@
         <div class="cu-desc">
           <div class="cu-left">
             <h2>招聘信息</h2>
-            <div v-for="(item,index) in newsList" :key="index">
-              <h3 class="desc-title">{{item.title}}</h3>
               <ul>
-                <li v-for="(subItem,subIndex) in item.content" :key="subIndex">
-                  {{subItem}}
+                <li v-for="(subItem, index) in list" :key="subItem.key">
+                  {{index+1}}.{{subItem.value}}
                 </li>
               </ul>
-            </div>
             <div>
               <h2>对外合作</h2>
               <div class="button">校地合作研究院</div>
@@ -33,16 +30,17 @@
               <el-input v-model="info.email"></el-input>
             </el-form-item>
             <el-form-item label="备注" required>
-              <el-input type="textarea" v-model="info.message"></el-input>
+              <el-input type="textarea" v-model="info.remark"></el-input>
             </el-form-item>
             <el-form-item>
-              <div class="button" style="width:100px;">提交</div>
+              <div class="button" style="width:100px;" @click="submit">提交</div>
             </el-form-item>
           </el-form>
         </div>
       </div>
 </template>
 <script>
+import { postContact, getMessage } from '@/apis/index'
 export default {
   name: 'contactUs',
   data () {
@@ -50,16 +48,39 @@ export default {
       info: {
         name: '',
         email: '',
-        message: ''
+        remark: ''
       },
-      newsList: [
-        {
-          title: '地址',
-          content: [
-            '北京市海淀区双清路77号院4号楼11层1102'
-          ]
-        }
+      list: [
       ]
+    }
+  },
+  mounted () {
+    getMessage({ id: 3 })
+      .then((res) => {
+        const data = res.content.filter((item) => {
+          return item.id === 3
+        })[0]
+        this.list = JSON.parse(data.context)
+        console.log(this.list)
+      })
+  },
+  methods: {
+    submit () {
+      const data = {
+        name: this.info.name,
+        email: this.info.email,
+        remark: this.info.remark
+      }
+      postContact(data)
+        .then((res) => {
+          this.$message({
+            type: 'success',
+            message: '提交成功!'
+          })
+          this.info.name = ''
+          this.info.email = ''
+          this.info.remark = ''
+        })
     }
   }
 }

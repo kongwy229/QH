@@ -4,7 +4,6 @@ import index from '../views/newsView/index'
 import desc from '../views/newsView/desc'
 import news from '../views/newsView/news'
 import newsDetail from '../views/newsView/newsDetail'
-import research from '../views/newsView/research'
 import nowAnnualMeeting from '../views/newsView/nowAnnualMeeting'
 import development from '../views/newsView/development'
 Vue.use(VueRouter)
@@ -47,12 +46,17 @@ const routes = [
   {
     path: '/research',
     name: 'research',
-    component: research
+    component: news
   },
   {
     path: '/research/:cate',
     name: 'researchCate',
-    component: research
+    component: news
+  },
+  {
+    path: '/research/:cate/:id',
+    name: 'researchDetail',
+    component: newsDetail
   },
   {
     path: '/now',
@@ -79,11 +83,6 @@ const routes = [
     name: 'peopleDetail',
     component: () => import(/* webpackChunkName: "people" */ '../views/newsView/peopleDetail.vue')
   },
-  // {
-  //   path: '/news/:id',
-  //   name: 'newsDetail',
-  //   component: () => import(/* webpackChunkName: "newsDetail" */ '../views/web/newsDetail.vue')
-  // },
   {
     path: '/contactUs',
     name: 'contactUs',
