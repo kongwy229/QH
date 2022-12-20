@@ -76,7 +76,6 @@ export default {
   mounted () {
     getHomePage().then((res) => {
       this.notice = res.notice
-      console.log(res)
       this.list[1].array = [...res.achievements]
       this.list[0].array = [...res.academics]
       this.experts = [...res.experts]

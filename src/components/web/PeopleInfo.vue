@@ -11,7 +11,7 @@
                     <div>
                         <h3>{{sub.name}}</h3>
                         <p>{{sub.position}}</p>
-                        <p class="limit">{{sub.intro}}</p>
+                        <p class="limit">{{sub.brief}}</p>
                         <p class="more" @click="jumpTo(sub.id)">查看更多 <i class="el-icon-right"></i></p>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
         </el-carousel>
         <h3 style="margin-top:50px;">友情链接</h3>
         <div class="friendLink">
-            <p v-for="item in links" :key="item.id">{{item.name}}</p>
+            <a v-for="item in links" :key="item.id" :href="item.url" target="_blank">{{item.name}}</a>
         </div>
     </div>
 </template>
@@ -133,11 +133,12 @@ export default {
 .friendLink {
     display: flex;
     flex-wrap: wrap;
-    p{
+    a{
         font-size:1.0rem;
         color: #956609;
         overflow: hidden;
         white-space: wrap;
+        cursor: pointer;
         padding:0px 20px;
         margin-left: 3.0rem;
     }

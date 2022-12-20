@@ -5,11 +5,11 @@
           <div class="container">
             <div v-for="p in item.people" :key="p.name" class="p-con" :class="{limit:item.people.length>1}" @click="jumpTo(p.id)">
                 <div>
-                  <img src="../../assets/img/default.png"/>
+                  <img :src="p.img ? p.img : '../../assets/img/default.png'"/>
                 </div>
                 <div class="con-desc">
                     <h3>{{p.name}}</h3>
-                    <p>{{p.intro}}</p>
+                    <p>{{p.brief}}</p>
                     <p>邮件:{{p.email}}</p>
                     <!-- <p v-show="p.pwl">个人网页:{{p.pwl}}</p> -->
                 </div>
@@ -19,7 +19,7 @@
       </div>
 </template>
 <script>
-import { getPeopleList } from '@/apis/index'
+import { getPeopleList, baseImgUrl } from '@/apis/index'
 export default {
   name: 'peopleList',
   data () {
@@ -76,7 +76,8 @@ export default {
           ]
         },
         {
-          // cat: '研究生，博士',
+          cat: '研究生，博士',
+          people: []
           // people: [
           //   {
           //     id: 6,
@@ -164,16 +165,18 @@ export default {
     }
   },
   mounted () {
-    getPeopleList().then((res) => {
+    getPeopleList({ category: 2 }).then((res) => {
       console.log(res)
       res.content.forEach(item => {
-        // if (item.img) {
-        //   item.img = baseImgUrl + item.img
-        // }
-        if (item.category === 1) {
+        if (item.img) {
+          item.img = baseImgUrl + item.img
+        }
+        if (item.type === 100) {
           this.list[0].people.push(item)
-        } else if (item.category === 2) {
+        } else if (item.type === 101) {
           this.list[1].people.push(item)
+        } else {
+          this.list[2].people.push(item)
         }
       })
     })
@@ -215,6 +218,7 @@ p{
   margin-top:50px;
   justify-content: space-around;
   img{
+    width: 140px;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     margin-right:10px;
@@ -231,6 +235,6 @@ p{
   }
 }
 .limit{
-  flex-basis: 45%;
+  flex-basis: 48%;
 }
 </style>
