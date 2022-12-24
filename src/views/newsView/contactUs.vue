@@ -9,13 +9,12 @@
                 </li>
               </ul>
             <div>
-              <h2>对外合作</h2>
-              <div class="button">校地合作研究院</div>
-              <div class="button">海外科研合作</div>
+              <h2>地址信息</h2>
+              <div class="button">北京市海淀区双清路77号院1 </div>
             </div>
           </div>
           <div class="cu-right">
-            <img width="800px" src="../../assets/img/local1.png"/>
+            <img width="800px" :src="img"/>
             <!-- <img width="800px" src="../../assets/img/local2.png"/> -->
             <hr/>
           </div>
@@ -40,7 +39,7 @@
       </div>
 </template>
 <script>
-import { postContact, getMessage } from '@/apis/index'
+import { postContact, getMessage, baseImgUrl } from '@/apis/index'
 export default {
   name: 'contactUs',
   data () {
@@ -50,18 +49,22 @@ export default {
         email: '',
         remark: ''
       },
+      img: '',
       list: [
       ]
     }
   },
   mounted () {
-    getMessage({ id: 3 })
+    getMessage()
       .then((res) => {
         const data = res.content.filter((item) => {
           return item.id === 3
         })[0]
         this.list = JSON.parse(data.context)
-        console.log(this.list)
+        const img = res.content.filter((item) => {
+          return item.id === 4
+        })[0].context
+        this.img = img.indexOf('http') === -1 ? baseImgUrl + img : img
       })
   },
   methods: {

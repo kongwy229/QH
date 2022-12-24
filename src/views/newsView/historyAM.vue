@@ -18,49 +18,13 @@
       </div>
 </template>
 <script>
-import { getNewsList, baseImgUrl } from '@/apis/index'
+import { getAnnul, baseImgUrl } from '@/apis/index'
 export default {
   name: 'desc',
   data () {
     return {
       isMobile: false,
       newsList: [
-        // {
-        //   id: '1',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '2021年质量院年会',
-        //   time: '2021年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: '美国核管理委员会（NRC）刚刚发布了一份报告，得出结论，NGA东部地面运动特征模型是…'
-        // },
-        // {
-        //   id: '2',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '2020年质量院年会',
-        //   time: '2020年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖。'
-        // },
-        // {
-        //   id: '3',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '2019年质量院年会',
-        //   time: '2019年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        // },
-        // {
-        //   id: '4',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '2018年质量院年会',
-        //   time: '2018年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        // }
       ]
     }
   },
@@ -70,7 +34,7 @@ export default {
   methods: {
     getList (id) {
       this.newsList = []
-      getNewsList({ category: 11 })
+      getAnnul({ isCurrent: 0 })
         .then((res) => {
           console.log(res)
           res.content.forEach((item) => {
@@ -79,7 +43,6 @@ export default {
             }
             this.newsList.push(item)
           })
-          // this.newsList = [...res.content]
         })
     },
     jumpTo (id) {

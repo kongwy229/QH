@@ -88,11 +88,6 @@ const routes = [
     name: 'contactUs',
     component: () => import(/* webpackChunkName: "contactUs" */ '../views/newsView/contactUs.vue')
   },
-  // {
-  //   path: '/signup',
-  //   name: 'signup',
-  //   component: signup
-  // },
   {
     path: '*',
     redirect: '/'

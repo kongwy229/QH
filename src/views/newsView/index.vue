@@ -18,24 +18,11 @@
             <div class="block" v-for="(item,index) in list" :key="index">
               <div class="title">{{item.title}}</div>
               <ul>
-                <li v-for="subItem in item.array" :key="subItem.id">
+                <li v-for="subItem in item.array" :key="subItem.id" @click="jumpTo(subItem)">
                   <i></i> {{subItem.title}}
                 </li>
               </ul>
             </div>
-            <!-- <div>
-              <div class="title">对外合作</div>
-              <div class="button">校地合作研究院</div>
-              <div class="button">海外科研合作</div>
-            </div>
-            <div>
-              <div class="title" style="margin-top:70px;">新闻选择</div>
-              <div class="time">
-                  <div v-for="(item,index) in timeList" :key="index">
-                    {{item}}
-                  </div>
-              </div>
-            </div> -->
           </div>
       </div>
       <PeopleInfo :experts="experts" :links="links"></PeopleInfo>
@@ -52,6 +39,18 @@ export default {
   },
   data () {
     return {
+      cate: {
+        1: 'news/policy',
+        2: 'news/notice',
+        3: 'news/forum',
+        4: 'news/communication',
+        5: 'news/lecture',
+        6: 'research/MQPR',
+        7: 'research/QMCT',
+        8: 'research/RASR',
+        9: 'research/HFSR',
+        10: 'research/ROSQ'
+      },
       carousels: [],
       notice: '',
       list: [
@@ -81,10 +80,19 @@ export default {
       this.experts = [...res.experts]
       this.links = [...res.links]
       res.carousels.forEach(item => {
-        item.img = baseImgUrl + item.img
+        if (item.img.indexOf('http') === -1) {
+          item.img = baseImgUrl + item.img
+        }
         this.carousels.push(item)
       })
     })
+  },
+  methods: {
+    jumpTo (item) {
+      this.$router.push({
+        path: this.cate[item.category] + '/' + item.id
+      })
+    }
   }
 }
 </script>

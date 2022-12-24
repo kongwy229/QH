@@ -73,42 +73,6 @@ export default {
         }
       },
       newsList: [
-        // {
-        //   id: '1',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '美国核管理委员会验证的NGA-East地震地面运动模型',
-        //   time: '2022年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: '美国核管理委员会（NRC）刚刚发布了一份报告，得出结论，NGA东部地面运动特征模型是…'
-        // },
-        // {
-        //   id: '2',
-        //   img: '../../assets/img/start.jpg',
-        //   title: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖',
-        //   time: '2022年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'Wadie Chalgham在加州大学洛杉矶分校2020年大满贯决赛上获得观众选择奖。'
-        // },
-        // {
-        //   id: '3',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '研讨会邀请：PRA和NRC风险知情决策：一些趋势和挑战',
-        //   time: '2022年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        // },
-        // {
-        //   id: '4',
-        //   img: '../../assets/img/start.jpg',
-        //   title: '美国核管理委员会验证的NGA-East地震地面运动模型',
-        //   time: '2022年12月3日',
-        //   author: 'isak',
-        //   cate: '时事',
-        //   desc: 'B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。B.John Garrick风险科学研究所诚挚邀请您参加Nathan Siu博士关于“NRC的PRA和风险知情决策：一些趋势和挑战”的研讨会。研讨会将于2020年2月21日下午1点至2点在加州大学洛杉矶分校工程五号楼5101室举行。'
-        // }
       ]
     }
   },
@@ -133,11 +97,13 @@ export default {
             }
             this.newsList.push(item)
           })
-          // this.newsList = [...res.content]
         })
     },
     jumpTo (id) {
-      this.$router.push({ name: 'newsDetail', params: { id: id } })
+      this.$router.push({
+        name: this.$route.name.indexOf('research') === -1 ? 'newsDetail' : 'researchDetail',
+        params: { id: id }
+      })
     }
   }
 }

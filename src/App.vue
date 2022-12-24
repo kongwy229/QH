@@ -161,7 +161,7 @@ export default {
           ]
         },
         {
-          title: '研究院人员',
+          title: '专家介绍',
           path: '/people'
         },
         {
@@ -353,6 +353,7 @@ export default {
 }
 .con{
   width: 90%;
+  min-height: calc(100vh - 400px);
   margin: 0 auto;
 }
 .footer{
@@ -364,8 +365,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #9a9a9a;
-  /* background: #fbf7fd; */
-  /* background:linear-gradient(to right, @dark_bgColor, #7e2a8a); */
   color:@dark_bgColor;
   p{
     /* padding-left:30px; */

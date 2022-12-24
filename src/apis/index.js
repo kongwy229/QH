@@ -48,10 +48,15 @@ export const getNewsList = async (params) => {
 
 // 提交联系方式
 export const postContact = async (data) => {
-  return await axios.post(`${baseUrl}web/addContact`, { withCredentials: true, data })
+  return await axios.post(`${baseUrl}web/addContact`, data)
 }
 
 // 获取公告数据
 export const getMessage = async (params) => {
   return await axios.get(`${baseUrl}web/notice`, { withCredentials: true, params: params })
+}
+
+// 获取当年年会
+export const getAnnul = async (params) => {
+  return await axios.get(`${baseUrl}web/annul`, { withCredentials: true, params: params })
 }
