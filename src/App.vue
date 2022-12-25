@@ -46,8 +46,8 @@
         </div>
       </div>
       <div class="logo">
-        <img src="@/assets/img/logo.jpg" width="100px"/>
-        <h1>清华大学质量与可靠性研究院</h1>
+        <img src="@/assets/img/logo-name.png"/>
+        <!-- <h1>清华大学质量与可靠性研究院</h1> -->
       </div>
       <div class="nav" v-show="!isMobile">
         <el-menu router :default-active="activeIndex" mode="horizontal" @select="handleSelect" text-color="#46228e">
@@ -84,17 +84,6 @@
           <el-menu-item :index="navList[6].path">
             {{navList[6].title}} <span class="line"> / </span>
           </el-menu-item>
-          <!-- <el-menu-item  v-for="item in navList" :key="item.path" :index="item.path">
-            {{item.title}} <span class="line"> / </span>
-          </el-menu-item> -->
-
-          <!-- <el-submenu v-for="item in navList" :key="item.path" :index="item.path">
-            <template slot="title">{{item.title}} <span class="line"> / </span></template>
-            <el-menu-item  v-for="(subItem,index) in item.children" :key="item.path + index" :index="item.path + index">
-              {{subItem}}
-            </el-menu-item>
-          </el-submenu> -->
-
         </el-menu>
         <div class="headerR-search">
             <input placeholder="请输入关键词"/>
@@ -107,34 +96,24 @@
     </div>
     <!-- <hr style="wdith:80%;margin:0 auto;" /> -->
     <div class="footer">
+      <div class="right">
+        <img src="./assets/img/index/logoColor.png" width="150px"/>
+      </div>
       <div class="left">
-        <div>
+        <!-- <div>
           <a><img src="https://www.tsinghua.edu.cn/image/img56_2.png"/></a>
           <a><img src="https://www.tsinghua.edu.cn/image/img56_1.png"/></a>
           <a><img src="https://www.tsinghua.edu.cn/image/img56_4.png"/></a>
-        </div>
+        </div> -->
         <p>Copyright © 2022-2022 清华大学质量与可靠性研究院 版权所有</p>
-      </div>
-      <div class="right">
-        <img src="./assets/img/index/logoColor.png" width="150px"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import IndexHeader from '@/components/new/IndexHeader'
-// import Footer from '@/components/web/public/IndexFooter'
-// import Link from '@/components/web/Link'
-// import NewsBorad from '@/components/web/NewsBorad'
 export default {
   name: 'app',
-  components: {
-    // NewsBorad
-    // IndexHeader,
-    // Footer,
-    // Link
-  },
   data () {
     return {
       activeIndex: 'index',
@@ -234,8 +213,7 @@ export default {
           title: '加入我们',
           path: '/contactUs'
         }
-      ],
-      timeList: [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]
+      ]
     }
   },
   methods: {
@@ -254,25 +232,39 @@ export default {
   },
 
   created () {
+    this.resizeFun()
     window.addEventListener('resize', this.resizeFun, false)
   }
 
 }
 </script>
-
+<style>
+.editor-content-view img{
+  max-width: 100%;
+}
+</style>
 <style lang = "less">
 @media screen and (max-width: 1000px) {
   #app {
     .nav{
       display: block;
     }
+    .logo{
+      img{
+        width: 100%;
+      }
+    }
+    .footer{
+      padding-top:20px;
+      display: block;
+      height: 100px;
+      text-align: center;
+    }
   }
 }
 .logo{
-  display: flex;
-  align-items: center;
-  h1{
-    margin-left:20px;
+  img{
+    width: 45%;
   }
 }
 .header{
@@ -280,15 +272,18 @@ export default {
   margin: 20px auto 10px;
 }
 .mobile-nav{
+  width:100%;
+  margin:0px;
   .el-menu{
     z-index:100;
+    border-right: 0px;
   }
   div{
     line-height: 50px;
     height: 50px;
     color: #956609;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
   }
 }
 .nav{
@@ -325,6 +320,7 @@ export default {
 }
 .el-submenu__title{
   padding: 0 3px !important;
+  font-weight: bold;
 }
 .el-menu--horizontal>.el-submenu .el-submenu__title {
     font-weight: bold;
@@ -383,6 +379,7 @@ export default {
     }
   }
   .right{
+    order: 1;
     width:20%;
   }
 }

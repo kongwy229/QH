@@ -41,10 +41,11 @@ export default {
 <style lang = "less" scoped>
 h2{
   color: @dark_bgColor;
+  font-size:1.25rem;
 }
 h3{
   color: @dark_bgColor;
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   font-weight: bolder;
   margin: 20px 0;
 }

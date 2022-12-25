@@ -39,7 +39,7 @@ export default {
 <style lang = "less" scoped>
 h2{
   color: @dark_bgColor;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 h3{
   color: @dark_bgColor;

@@ -2,11 +2,10 @@
   <div>
       <div class="container">
           <div class="left">
-            <h1>清华大学质量与可靠性研究院相关公告</h1>
-            <el-carousel trigger="click" height="500px">
+            <h2>清华大学质量与可靠性研究院相关公告</h2>
+            <el-carousel trigger="click">
               <el-carousel-item v-for="item in carousels" :key="item.id">
-                <!-- <h3 class="small"></h3> -->
-                <img height="100%" width="100%" :src="item.img"/>
+                <img height="100%" width="100%" :src="item.img" @click="jumpTo(item)"/>
               </el-carousel-item>
             </el-carousel>
             <p class="desc">
@@ -30,7 +29,6 @@
 </template>
 <script>
 import { baseImgUrl, getHomePage } from '@/apis/index'
-// import NewsBorad from '@/components/web/NewsBorad'
 import PeopleInfo from '@/components/web/PeopleInfo'
 export default {
   name: 'index',
@@ -98,8 +96,8 @@ export default {
 </script>
 
 <style lang = "less" scoped>
-  h1{
-    font-size:1.5rem;
+  h2{
+    font-size:1.25rem;
   }
   .desc {
       width:100%;
@@ -162,7 +160,7 @@ export default {
         width:100%;
         li{
             padding-left: 20px;
-            width: 100%;
+            /* width: 100%; */
             height: 50px;
             cursor: pointer;
             line-height: 25px;

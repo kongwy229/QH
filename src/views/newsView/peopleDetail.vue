@@ -1,7 +1,7 @@
 <template>
       <div>
         <div class="people-detail">
-            <div>
+            <div class="people-img">
               <img :src="avator"/>
             </div>
             <div class="con-desc">
@@ -10,7 +10,7 @@
                 <p>{{brief}}</p>
             </div>
         </div>
-        <div v-html="intro">
+        <div v-html="intro" class="editor-content-view">
         </div>
       </div>
 </template>
@@ -79,6 +79,14 @@ p{
   padding: 10px;
   h3{
     margin-top:-10px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .people-detail{
+    display: block;
+    .people-img{
+      text-align: center;
+    }
   }
 }
 </style>

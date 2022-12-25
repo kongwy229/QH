@@ -8,7 +8,7 @@
               <img :src="item.previewImg"/>
             </div>
             <div class="desc">
-              <p>{{item.desc}}</p>
+              <p>{{item.content}}</p>
                <p class="more" @click="jumpTo(item.id)">查看更多 <i class="el-icon-right"></i></p>
             </div>
           </div>
@@ -57,11 +57,12 @@ export default {
   margin-bottom:50px;
 }
 h2{
+  font-size:1.25rem;
   color: @dark_bgColor;
 }
 h3{
   color: @dark_bgColor;
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   font-weight: bolder;
   margin: 20px 0;
 }
@@ -93,7 +94,8 @@ h3{
 .detail{
     color: #956609;
     font-weight: bold;
-    font-size: 1.0rem;
+    font-size: 0.8rem;
+    text-indent: 0rem;
     span{
       padding-left:10px;
     }
@@ -101,18 +103,20 @@ h3{
 .time{
   color:@dark_titleColor;
   text-indent: 0;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 p{
   line-height: 30px;
+  text-indent: 2rem;
   color: #666666;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .more{
   color: @dark_titleColor;
+  text-indent: 0rem;
   font-weight: bold;
-  font-size:1rem;
+  font-size:0.8rem;
   cursor: pointer;
 }
 .more:hover{

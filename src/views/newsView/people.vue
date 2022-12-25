@@ -4,14 +4,13 @@
           <h3 class="con-title">{{item.cat}}</h3>
           <div class="container">
             <div v-for="p in item.people" :key="p.name" class="p-con" :class="{limit:item.people.length>1}" @click="jumpTo(p.id)">
-                <div>
+                <div class="con-img">
                   <img :src="p.img ? p.img : '../../assets/img/default.png'"/>
                 </div>
                 <div class="con-desc">
                     <h3>{{p.name}}</h3>
                     <p>{{p.brief}}</p>
                     <p>邮件:{{p.email}}</p>
-                    <!-- <p v-show="p.pwl">个人网页:{{p.pwl}}</p> -->
                 </div>
             </div>
           </div>
@@ -78,88 +77,6 @@ export default {
         {
           cat: '研究生，博士',
           people: []
-          // people: [
-          //   {
-          //     id: 6,
-          //     name: 'Mu-Xia1',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 7,
-          //     name: 'Mu-Xia2',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 8,
-          //     name: 'Mu-Xia3',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 9,
-          //     name: 'Mu-Xia4',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 10,
-          //     name: 'Mu-Xia5',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 11,
-          //     name: 'Mu-Xia6',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 18,
-          //     name: 'Mu-Xia3',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 19,
-          //     name: 'Mu-Xia4',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 110,
-          //     name: 'Mu-Xia5',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   },
-          //   {
-          //     id: 111,
-          //     name: 'Mu-Xia6',
-          //     avator: '',
-          //     desc: '他于2010年在华南理工大学（SCUT）获得理学学士学位，2012年和2013年分别在南特大学和SCUT获得理学硕士学位，2019年在巴黎萨克莱大学获得哲学博士学位。自2020年以来，他一直在清华大学担任工业工程系博士后研究员。他目前的研究兴趣包括工业和通信系统的可靠性评估和优化、鲁棒优化和近似算法设计。',
-          //     email: 'muxiasun@mail.tsinghua.edu.cn',
-          //     pwl: ''
-          //   }
-          // ]
         }
       ]
     }
@@ -204,6 +121,7 @@ h3{
 }
 p{
   line-height: 30px;
+  text-align: justify;
   text-indent: 2rem;
   color: #666666;
   font-size: 1.0rem;
@@ -226,15 +144,38 @@ p{
 }
 .con-title{
   margin-top:40px;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 .con-desc{
   padding: 10px;
   h3{
     margin-top:-10px;
+    font-size:1.0rem;
   }
 }
 .limit{
   flex-basis: 48%;
+}
+@media screen and (max-width: 1000px) {
+  .container{
+    display: block;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container{
+    display: block;
+    .p-con{
+      display: block;
+    }
+    .con-img{
+      text-align: center;
+    }
+    .con-desc{
+      h3{
+        text-align: center;
+        margin-top:5px;
+      }
+    }
+  }
 }
 </style>

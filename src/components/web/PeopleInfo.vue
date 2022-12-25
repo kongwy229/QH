@@ -11,7 +11,7 @@
                     <div>
                         <h3>{{sub.name}}</h3>
                         <p>{{sub.position}}</p>
-                        <p class="limit">{{sub.brief}}</p>
+                        <p class="limit">{{sub.brief.slice(0,50) + '...'}}</p>
                         <p class="more" @click="jumpTo(sub.id)">查看更多 <i class="el-icon-right"></i></p>
                     </div>
                 </div>
@@ -141,6 +141,7 @@ export default {
         cursor: pointer;
         padding:0px 20px;
         margin-left: 3.0rem;
+        margin-top: 1rem;
     }
 }
 .peopleInfo{
@@ -195,5 +196,21 @@ export default {
             }
         }
     }
+}
+@media screen and (max-width: 1000px) {
+  .peopleInfo {
+    /deep/.el-carousel__container{
+      border:1px solid #fff;
+      height: 300px;
+    }
+    .container{
+      .con-p{
+        display: block;
+        .limit{
+          display: none;
+        }
+      }
+    }
+  }
 }
 </style>

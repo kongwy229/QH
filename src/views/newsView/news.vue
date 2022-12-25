@@ -1,22 +1,31 @@
 <template>
       <div>
         <h2>{{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
-        <div class="news-con" v-for="item in newsList" :key="item.id">
-          <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
-          <p class="time">
-            <i class="el-icon-time"></i><span>{{item.updateTime}}</span>
-            <i class="el-icon-user"></i><span>{{item.author}}</span>
-          </p>
-          <div class="container">
-            <div class="img">
-              <img :src="item.previewImg? item.previewImg:'../../assets/img/start.jpg'"/>
+        <div class="limit-height" v-show="newsList.length > 0">
+          <div class="news-con" v-for="item in newsList" :key="item.id">
+            <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
+            <p class="time">
+              <i class="el-icon-time"></i><span>{{item.updateTime}}</span>
+              <i class="el-icon-user"></i><span>{{item.author}}</span>
+            </p>
+            <div class="container">
+              <div class="img">
+                <img :src="item.previewImg? item.previewImg:'../../assets/img/start.jpg'"/>
+              </div>
+              <div class="desc">
+                <p>{{item.brief}}</p>
+                <p class="more" @click="jumpTo(item.id)">查看更多 <i class="el-icon-right"></i></p>
+              </div>
             </div>
-            <div class="desc">
-              <p>{{item.desc}}</p>
-               <p class="more" @click="jumpTo(item.id)">查看更多 <i class="el-icon-right"></i></p>
-            </div>
+            <hr/>
           </div>
-          <hr/>
+        </div>
+        <div class="page">
+          <el-pagination
+            :hide-on-single-page="true"
+            layout="prev, pager, next"
+            :total="total">
+          </el-pagination>
         </div>
         <div class="empty" v-show="newsList.length === 0">
           当前无数据
@@ -26,10 +35,11 @@
 <script>
 import { getNewsList, baseImgUrl } from '@/apis/index'
 export default {
-  name: 'desc',
+  name: 'news',
   data () {
     return {
       isMobile: false,
+      total: 0,
       cate: {
         policy: {
           label: '质量相关政策',
@@ -97,6 +107,7 @@ export default {
             }
             this.newsList.push(item)
           })
+          this.total = res.totalElements
         })
     },
     jumpTo (id) {
@@ -116,15 +127,19 @@ export default {
     color: #666666;
     line-height: 50vh;
 }
+.limit-height{
+    min-height: 45vh;
+}
 .news-con{
   margin-bottom:50px;
 }
 h2{
   color: @dark_bgColor;
+  font-size: 1.25rem;
 }
 h3{
   color: @dark_bgColor;
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   font-weight: bolder;
   margin: 20px 0;
   cursor: pointer;
@@ -144,6 +159,10 @@ h3{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    p{
+      font-size: 0.8rem;
+      text-indent: 2rem;
+    }
   }
 }
 @media screen and (max-width: 1000px) {
@@ -158,6 +177,7 @@ h3{
     color: #956609;
     font-weight: bold;
     font-size: 1.0rem;
+    text-indent: 0rem;
     span{
       padding-left:10px;
     }
@@ -165,7 +185,7 @@ h3{
 .time{
   color:@dark_titleColor;
   text-indent: 0;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   i{
     margin-right:5px;
@@ -182,10 +202,17 @@ p{
 .more{
   color: @dark_titleColor;
   font-weight: bold;
-  font-size:1rem;
+  font-size:0.8rem;
+  text-indent: 0rem !important;
   cursor: pointer;
 }
 .more:hover{
   color:#000;
+}
+.page{
+  text-align: center;
+  /deep/.el-pager li.active, /deep/.el-pager li:hover{
+    color:@dark_titleColor;
+  }
 }
 </style>

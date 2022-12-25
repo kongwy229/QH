@@ -9,7 +9,7 @@
         </p>
         <div class="img">
           <img :src="form.previewImg"/>
-          <div class="content" v-html="form.content">
+          <div class="editor-content-view content" v-html="form.content">
           </div>
         </div>
       </div>
@@ -78,13 +78,15 @@ export default {
 <style lang = "less" scoped>
 .canClick{
   cursor: pointer;
+  font-size: 1.25rem;
 }
 h2{
   color: @dark_bgColor;
+  font-size: 1.25rem;
 }
 h3{
   color: @dark_bgColor;
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   font-weight: bolder;
   margin: 20px 0;
 }
@@ -106,7 +108,7 @@ p{
 .time{
   color:@dark_titleColor;
   text-indent: 0;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   i{
     margin-right:5px;

@@ -1,6 +1,10 @@
 <template>
       <div>
         <div class="cu-desc">
+          <div class="cu-right">
+            <img :src="img"/>
+            <hr/>
+          </div>
           <div class="cu-left">
             <h2>招聘信息</h2>
               <ul>
@@ -12,11 +16,6 @@
               <h2>地址信息</h2>
               <div class="button">北京市海淀区双清路77号院1 </div>
             </div>
-          </div>
-          <div class="cu-right">
-            <img width="800px" :src="img"/>
-            <!-- <img width="800px" src="../../assets/img/local2.png"/> -->
-            <hr/>
           </div>
         </div>
         <div class="cu-form">
@@ -120,8 +119,13 @@ export default {
       line-height: 2.5rem;
     }
     .cu-right{
+      order: 1;
+      width: 60%;
       hr{
         margin:20px auto;
+      }
+      img{
+        width:100%;
       }
     }
   }
@@ -150,5 +154,19 @@ export default {
   }
   h3{
     font-size: 1.0rem;
+  }
+  @media screen and (max-width: 1000px) {
+    .form{
+      width:100%;
+    }
+    .cu-desc {
+      display: block;
+      .cu-left{
+        width:100%;
+      }
+      .cu-right{
+        width: 100%;
+      }
+    }
   }
 </style>
