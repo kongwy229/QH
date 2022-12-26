@@ -5,7 +5,7 @@
           <el-timeline-item  v-for="item in info" :key="item.time" :timestamp="item.time" placement="top">
             <el-card style="text-align:center;">
               <h3>{{item.title}}</h3>
-              <img :src="item.img" width="500px"/>
+              <img :src="item.img" max-width="80%"/>
             </el-card>
           </el-timeline-item>
         </el-timeline>

@@ -15,6 +15,18 @@
           <hr/>
           <p class="detail"><i class="el-icon-s-custom"></i><span>{{item.author}}</span></p>
         </div>
+        <div class="page">
+          <el-pagination
+            :hide-on-single-page="true"
+            class="pagination"
+            :current-page.sync="pager.pageNow"
+            :page-size="pager.pageSize"
+            layout="prev, pager, next"
+            background
+            :total="pager.total"
+            @current-change="handlePaginationChange"
+          />
+        </div>
       </div>
 </template>
 <script>
@@ -25,18 +37,31 @@ export default {
     return {
       isMobile: false,
       newsList: [
-      ]
+      ],
+      pager: {
+        pageNow: 1,
+        pageSize: 5,
+        total: 0
+      }
     }
   },
   mounted () {
     this.getList()
   },
   methods: {
-    getList (id) {
+    handlePaginationChange () {
+      this.getList()
+    },
+    getList () {
       this.newsList = []
-      getAnnul({ isCurrent: 0 })
+      const params = {
+        page: this.pager.pageNow - 1,
+        size: this.pager.pageSize,
+        isCurrent: 0
+      }
+      getAnnul(params)
         .then((res) => {
-          console.log(res)
+          this.pager.total = res.totalElements
           res.content.forEach((item) => {
             if (item.previewImg && item.previewImg.indexOf('http') === -1) {
               item.previewImg = baseImgUrl + item.previewImg
@@ -122,5 +147,10 @@ p{
 .more:hover{
   color:#000;
 }
-
+.page{
+  text-align: center;
+  /deep/.el-pager li.active, /deep/.el-pager li:hover{
+    color:@dark_titleColor;
+  }
+}
 </style>

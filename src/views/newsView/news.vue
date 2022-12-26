@@ -1,7 +1,7 @@
 <template>
       <div>
         <h2>{{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
-        <div class="limit-height" v-show="newsList.length > 0">
+        <div class="limit-height" v-show="newsList.length > 0" v-loading="loading">
           <div class="news-con" v-for="item in newsList" :key="item.id">
             <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
             <p class="time">
@@ -23,8 +23,11 @@
         <div class="page">
           <el-pagination
             :hide-on-single-page="true"
+            :current-page.sync="pager.pageNow"
+            :page-size="pager.pageSize"
             layout="prev, pager, next"
-            :total="total">
+            :total="pager.total"
+            @current-change="handlePaginationChange">
           </el-pagination>
         </div>
         <div class="empty" v-show="newsList.length === 0">
@@ -39,7 +42,12 @@ export default {
   data () {
     return {
       isMobile: false,
-      total: 0,
+      loading: false,
+      pager: {
+        pageNow: 1,
+        pageSize: 5,
+        total: 0
+      },
       cate: {
         policy: {
           label: '质量相关政策',
@@ -87,8 +95,7 @@ export default {
     }
   },
   mounted () {
-    this.getList(this.cate[this.$route.params.cate].key)
-    console.log(this.$route)
+    this.handlePaginationChange()
   },
   watch: {
     '$route.params.cate': function (v) {
@@ -96,18 +103,27 @@ export default {
     }
   },
   methods: {
+    handlePaginationChange () {
+      this.getList(this.cate[this.$route.params.cate].key)
+    },
     getList (id) {
       this.newsList = []
-      getNewsList({ category: id })
+      this.loading = true
+      const params = {
+        page: this.pager.pageNow - 1,
+        size: this.pager.pageSize,
+        category: id
+      }
+      getNewsList(params)
         .then((res) => {
-          console.log(res)
           res.content.forEach((item) => {
             if (item.previewImg && item.previewImg.indexOf('http') === -1) {
               item.previewImg = baseImgUrl + item.previewImg
             }
             this.newsList.push(item)
           })
-          this.total = res.totalElements
+          this.pager.total = res.totalElements
+          this.loading = false
         })
     },
     jumpTo (id) {

@@ -1,7 +1,7 @@
 <template>
       <div>
         <h2 class="canClick" @click="jumpTo($route.params.cate)">
-          {{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate]}}</h2>
+          {{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
         <h3>{{form.title}}</h3>
         <p class="time">
           <i class="el-icon-time"></i><span>{{form.time}}</span>
@@ -21,11 +21,46 @@ export default {
   data () {
     return {
       cate: {
-        policy: '质量相关政策',
-        notice: '通知公告',
-        forum: '地方座谈会',
-        communication: '企业交流',
-        lecture: '学术讲座'
+        policy: {
+          label: '质量相关政策',
+          key: 1
+        },
+        notice: {
+          label: '通知公告',
+          key: 2
+        },
+        forum: {
+          label: '地方座谈会',
+          key: 3
+        },
+        communication: {
+          label: '企业交流',
+          key: 4
+        },
+        lecture: {
+          label: '学术讲座',
+          key: 5
+        },
+        MQPR: {
+          label: '宏观质量政策研究',
+          key: 6
+        },
+        RQMCT: {
+          label: '质量管理与控制技术研究',
+          key: 7
+        },
+        RASR: {
+          label: '可靠性与保障性研究',
+          key: 8
+        },
+        HFSR: {
+          label: '人因与安全研究',
+          key: 9
+        },
+        ROSQ: {
+          label: '服务质量研究',
+          key: 10
+        }
       },
       form: {
         title: '',

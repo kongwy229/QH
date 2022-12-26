@@ -22,13 +22,13 @@
         </div>
         <div class="people">
           <h3>组委会名单</h3>
-          <div class="people-list">
-            <div v-for="item in peopleList" :key="item.id">
+          <div class="editor-content-view" v-html="info.expert">
+            <!-- <div v-for="item in peopleList" :key="item.id">
                 <h3>{{item.name}}</h3>
                 <p>{{item.title}}</p>
                 <p class="limit">{{item.desc}}</p>
                 <p class="more" @click="jumpTo(item.id)">查看更多 <i class="el-icon-right"></i></p>
-            </div>
+            </div> -->
           </div>
         </div>
         <div>
