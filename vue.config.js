@@ -10,7 +10,6 @@ const externals = {
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
   'element-ui': 'ELEMENT',
-  // 'mavon-editor': 'mavonEditor',
   axios: 'axios'
 }
 const cdn = {
@@ -103,7 +102,7 @@ module.exports = {
        */
       config.plugin('html').tap(args => {
         args[0].cdn = cdn.build
-        args[0].title = 'Xanadu'
+        args[0].title = '清华大学质量与可靠性研究院官网'
         return args
       })
       // 压缩图片

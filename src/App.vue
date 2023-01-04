@@ -21,12 +21,15 @@
             <el-menu-item :index="navList[2].path">
               {{navList[2].title}}
             </el-menu-item>
-            <el-submenu :index="navList[3].path">
+            <!-- <el-submenu :index="navList[3].path">
               <template slot="title">{{navList[3].title}}</template>
               <el-menu-item  v-for="(subItem) in navList[3].children" :key="subItem.path" :index="subItem.path">
                 {{subItem.title}}
               </el-menu-item>
-            </el-submenu>
+            </el-submenu> -->
+            <el-menu-item :index="navList[3].path">
+              {{navList[3].title}}
+            </el-menu-item>
             <el-submenu :index="navList[4].path">
               <template slot="title">{{navList[4].title}}</template>
               <el-menu-item  v-for="(subItem) in navList[4].children" :key="subItem.path" :index="subItem.path">
@@ -63,12 +66,15 @@
           <el-menu-item :index="navList[2].path">
             {{navList[2].title}} <span class="line"> / </span>
           </el-menu-item>
-          <el-submenu :index="navList[3].path">
+          <el-menu-item :index="navList[3].path">
+            {{navList[3].title}}<span class="line"> / </span>
+          </el-menu-item>
+          <!-- <el-submenu :index="navList[3].path">
             <template slot="title">{{navList[3].title}} <span class="line"> / </span></template>
             <el-menu-item  v-for="(subItem) in navList[3].children" :key="subItem.path" :index="subItem.path">
               {{subItem.title}}
             </el-menu-item>
-          </el-submenu>
+          </el-submenu> -->
           <el-submenu :index="navList[4].path">
             <template slot="title">{{navList[4].title}} <span class="line"> / </span></template>
             <el-menu-item  v-for="(subItem) in navList[4].children" :key="subItem.path" :index="subItem.path">
@@ -86,13 +92,21 @@
           </el-menu-item>
         </el-menu>
         <div class="headerR-search">
-            <input placeholder="请输入关键词"/>
-            <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            <input placeholder="请输入关键词" v-model="text" @change="search"/>
+            <el-button type="primary" icon="el-icon-search" >搜索</el-button>
         </div>
       </div>
     </div>
     <div class="con">
-      <router-view></router-view>
+      <router-view v-show="text===''"></router-view>
+      <div v-show="text !== '' ">
+        <ul class="searchList">
+          <li v-for="item in list" :key="item.id">
+              <a :href="item.path"><i></i>{{item.title}}</a>
+          </li>
+        </ul>
+        <span v-show="list.length === 0"> 没有相关搜索结果</span>
+      </div>
     </div>
     <!-- <hr style="wdith:80%;margin:0 auto;" /> -->
     <div class="footer">
@@ -112,14 +126,29 @@
 </template>
 
 <script>
+import { search } from '@/apis/index'
 export default {
   name: 'app',
   data () {
     return {
       activeIndex: 'index',
+      cate: {
+        1: 'news',
+        2: 'news',
+        3: 'news',
+        4: 'news',
+        5: 'news/lecture',
+        6: 'research/MQPR',
+        7: 'research/QMCT',
+        8: 'research/RASR',
+        9: 'research/HFSR',
+        10: 'research/ROSQ'
+      },
       showNavList: true,
+      list: [],
       navShow: false,
       isMobile: false,
+      text: '',
       navList: [
         {
           title: '首页',
@@ -145,29 +174,29 @@ export default {
         },
         {
           title: '新闻中心',
-          path: '/news',
-          children: [
-            {
-              title: '质量相关政策',
-              path: '/news/policy'
-            },
-            {
-              title: '通知公告',
-              path: '/news/notice'
-            },
-            {
-              title: '地方座谈会',
-              path: '/news/forum'
-            },
-            {
-              title: '企业交流',
-              path: '/news/communication'
-            },
-            {
-              title: '学术讲座',
-              path: '/news/lecture'
-            }
-          ]
+          path: '/news'
+          // children: [
+          //   {
+          //     title: '质量相关政策',
+          //     path: '/news/policy'
+          //   },
+          //   {
+          //     title: '通知公告',
+          //     path: '/news/notice'
+          //   },
+          //   {
+          //     title: '地方座谈会',
+          //     path: '/news/forum'
+          //   },
+          //   {
+          //     title: '企业交流',
+          //     path: '/news/communication'
+          //   },
+          //   {
+          //     title: '学术讲座',
+          //     path: '/news/lecture'
+          //   }
+          // ]
         },
         {
           title: '科学研究',
@@ -200,7 +229,7 @@ export default {
           path: '/conference',
           children: [
             {
-              title: '当前年会',
+              title: `${new Date().getFullYear()}年会`,
               path: '/now'
             },
             {
@@ -220,6 +249,35 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
       console.log(this.$router)
+    },
+    search () {
+      if (this.text === '') return
+      const params = {
+        text: this.text,
+        sort: 'updateTime,desc',
+        page: 0,
+        size: 10
+      }
+      this.list = []
+      search(params)
+        .then(res => {
+          console.log(res)
+          res.content.forEach(element => {
+            if (element.type !== 'link') {
+              if (element.type === 'annual') {
+                element.path = `/history/${element.oid}`
+              } else if (element.type === 'expert') {
+                element.path = `/people/${element.oid}`
+              } else {
+                element.path = '/' + this.cate[element.category] + '/' + element.oid
+              }
+              this.list.push({
+                ...element
+              })
+            }
+          })
+          console.log(this.list)
+        })
     },
     resizeFun () {
       const width = document.documentElement.clientWidth
@@ -383,5 +441,28 @@ export default {
     width:20%;
   }
 }
-
+.searchList{
+  li{
+    display: block;
+  }
+  a{
+    text-decoration:none;
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px dashed #cccccc;
+    i{
+        display: block;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        z-index: 0;
+        margin-top: -2px;
+        background-color: #46228e;
+    }
+  }
+}
 </style>

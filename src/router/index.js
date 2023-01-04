@@ -34,15 +34,20 @@ const routes = [
     component: news
   },
   {
-    path: '/news/:cate',
-    name: 'newsCate',
-    component: news
-  },
-  {
-    path: '/news/:cate/:id',
+    path: '/news/:id',
     name: 'newsDetail',
     component: newsDetail
   },
+  // {
+  //   path: '/news/:cate',
+  //   name: 'newsCate',
+  //   component: news
+  // },
+  // {
+  //   path: '/news/:cate/:id',
+  //   name: 'newsDetail',
+  //   component: newsDetail
+  // },
   {
     path: '/research',
     name: 'research',

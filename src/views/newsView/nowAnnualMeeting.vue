@@ -7,9 +7,9 @@
         </div>
         <div>
           <h3>年会时间</h3>
-          <p>{{info.time}}</p>
+          <p>{{info.time ? info.time : '时间待定'}}</p>
         </div>
-        <div>
+        <div v-show="info.joinWay">
            <h3>年会报名</h3>
            <div class="join">
             <div>
@@ -20,7 +20,7 @@
             </div>
            </div>
         </div>
-        <div class="people">
+        <div v-show="info.expert" class="people">
           <h3>组委会名单</h3>
           <div class="editor-content-view" v-html="info.expert">
             <!-- <div v-for="item in peopleList" :key="item.id">
@@ -31,11 +31,11 @@
             </div> -->
           </div>
         </div>
-        <div>
+        <!-- <div>
           <h3>会议议程</h3>
           <div class="editor-content-view" v-html="info.agenda">
           </div>
-        </div>
+        </div> -->
       </div>
 </template>
 <script>

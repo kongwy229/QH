@@ -1,14 +1,18 @@
 <template>
       <div>
-        <h2 class="canClick" @click="jumpTo($route.params.cate)">
-          {{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
+        <h2 class="canClick" v-if="$route.name.indexOf('research') !== -1" @click="jumpTo($route.params.cate)">
+          科学研究-{{cate[$route.params.cate].label}}
+        </h2>
+        <h2 class="canClick" v-else>
+          新闻中心
+        </h2>
         <h3>{{form.title}}</h3>
         <p class="time">
           <i class="el-icon-time"></i><span>{{form.time}}</span>
           <i class="el-icon-user"></i><span>{{form.author}}</span>
         </p>
         <div class="img">
-          <img :src="form.previewImg"/>
+          <!-- <img :src="form.previewImg"/> -->
           <div class="editor-content-view content" v-html="form.content">
           </div>
         </div>
@@ -17,30 +21,30 @@
 <script>
 import { getNewsList, baseImgUrl } from '@/apis/index'
 export default {
-  name: 'desc',
+  name: 'newsDetail',
   data () {
     return {
       cate: {
-        policy: {
-          label: '质量相关政策',
-          key: 1
-        },
-        notice: {
-          label: '通知公告',
-          key: 2
-        },
-        forum: {
-          label: '地方座谈会',
-          key: 3
-        },
-        communication: {
-          label: '企业交流',
-          key: 4
-        },
-        lecture: {
-          label: '学术讲座',
-          key: 5
-        },
+        // policy: {
+        //   label: '质量相关政策',
+        //   key: 1
+        // },
+        // notice: {
+        //   label: '通知公告',
+        //   key: 2
+        // },
+        // forum: {
+        //   label: '地方座谈会',
+        //   key: 3
+        // },
+        // communication: {
+        //   label: '企业交流',
+        //   key: 4
+        // },
+        // lecture: {
+        //   label: '学术讲座',
+        //   key: 5
+        // },
         MQPR: {
           label: '宏观质量政策研究',
           key: 6
@@ -73,6 +77,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$route.params.id)
     this.getList(this.$route.params.id)
   },
   watch: {
@@ -82,6 +87,7 @@ export default {
   },
   methods: {
     getList (id) {
+      console.log(id)
       this.form = {
         title: '',
         time: '',

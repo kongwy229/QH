@@ -1,6 +1,7 @@
 <template>
       <div>
-        <h2>{{$route.name.indexOf('research') === -1 ? '新闻中心' :'科学研究'}}-{{cate[$route.params.cate].label}}</h2>
+        <h2 v-if="$route.name.indexOf('research') === -1">新闻中心</h2>
+        <h2 v-else>科学研究-{{cate[$route.params.cate].label}}</h2>
         <div class="limit-height" v-show="newsList.length > 0" v-loading="loading">
           <div class="news-con" v-for="item in newsList" :key="item.id">
             <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
@@ -36,7 +37,7 @@
       </div>
 </template>
 <script>
-import { getNewsList, baseImgUrl } from '@/apis/index'
+import { getNewsList, baseImgUrl, getNewsCenterList } from '@/apis/index'
 export default {
   name: 'news',
   data () {
@@ -49,26 +50,26 @@ export default {
         total: 0
       },
       cate: {
-        policy: {
-          label: '质量相关政策',
-          key: 1
-        },
-        notice: {
-          label: '通知公告',
-          key: 2
-        },
-        forum: {
-          label: '地方座谈会',
-          key: 3
-        },
-        communication: {
-          label: '企业交流',
-          key: 4
-        },
-        lecture: {
-          label: '学术讲座',
-          key: 5
-        },
+        // policy: {
+        //   label: '质量相关政策',
+        //   key: 1
+        // },
+        // notice: {
+        //   label: '通知公告',
+        //   key: 2
+        // },
+        // forum: {
+        //   label: '地方座谈会',
+        //   key: 3
+        // },
+        // communication: {
+        //   label: '企业交流',
+        //   key: 4
+        // },
+        // lecture: {
+        //   label: '学术讲座',
+        //   key: 5
+        // },
         MQPR: {
           label: '宏观质量政策研究',
           key: 6
@@ -104,15 +105,40 @@ export default {
   },
   methods: {
     handlePaginationChange () {
-      this.getList(this.cate[this.$route.params.cate].key)
+      if (this.$route.name.indexOf('research') === -1) { // 新闻列表
+        this.getNewsCenterList()
+      } else {
+        this.getList(this.cate[this.$route.params.cate].key)
+      }
+    },
+    getNewsCenterList () {
+      this.newsList = []
+      this.loading = true
+      const params = {
+        page: this.pager.pageNow - 1,
+        size: this.pager.pageSize
+      }
+      getNewsCenterList(params)
+        .then((res) => {
+          res.content.forEach((item) => {
+            if (item.previewImg && item.previewImg.indexOf('http') === -1) {
+              item.previewImg = baseImgUrl + item.previewImg
+            }
+            this.newsList.push(item)
+          })
+          this.pager.total = res.totalElements
+          this.loading = false
+        })
     },
     getList (id) {
       this.newsList = []
       this.loading = true
       const params = {
         page: this.pager.pageNow - 1,
-        size: this.pager.pageSize,
-        category: id
+        size: this.pager.pageSize
+      }
+      if (id !== undefined) {
+        params.category = id
       }
       getNewsList(params)
         .then((res) => {

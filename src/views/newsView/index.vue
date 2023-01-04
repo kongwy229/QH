@@ -38,11 +38,11 @@ export default {
   data () {
     return {
       cate: {
-        1: 'news/policy',
-        2: 'news/notice',
-        3: 'news/forum',
-        4: 'news/communication',
-        5: 'news/lecture',
+        1: 'news',
+        2: 'news',
+        3: 'news',
+        4: 'news',
+        5: 'news',
         6: 'research/MQPR',
         7: 'research/QMCT',
         8: 'research/RASR',
