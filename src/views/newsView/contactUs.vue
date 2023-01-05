@@ -6,34 +6,28 @@
             <hr/>
           </div>
           <div class="cu-left">
-            <h2>招聘信息</h2>
-              <ul>
-                <li v-for="(subItem, index) in list" :key="subItem.key">
-                  {{index+1}}.{{subItem.value}}
-                </li>
-              </ul>
             <div>
               <h2>地址信息</h2>
               <div class="button">北京市海淀区双清路77号院1 </div>
             </div>
+            <div class="cu-form">
+              <h2>联系我们</h2>
+              <el-form  class="form" label-width="80px" :model="info">
+                <el-form-item label="姓名" required>
+                  <el-input v-model="info.name"></el-input>
+                </el-form-item>
+                <el-form-item label="邮件" required>
+                  <el-input v-model="info.email"></el-input>
+                </el-form-item>
+                <el-form-item label="备注" required>
+                  <el-input type="textarea" v-model="info.remark"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <div class="button" style="width:100px;" @click="submit">提交</div>
+                </el-form-item>
+              </el-form>
+            </div>
           </div>
-        </div>
-        <div class="cu-form">
-          <h2>联系我们</h2>
-          <el-form  class="form" label-width="80px" :model="info">
-            <el-form-item label="姓名" required>
-              <el-input v-model="info.name"></el-input>
-            </el-form-item>
-            <el-form-item label="邮件" required>
-              <el-input v-model="info.email"></el-input>
-            </el-form-item>
-            <el-form-item label="备注" required>
-              <el-input type="textarea" v-model="info.remark"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <div class="button" style="width:100px;" @click="submit">提交</div>
-            </el-form-item>
-          </el-form>
         </div>
       </div>
 </template>
@@ -56,10 +50,10 @@ export default {
   mounted () {
     getMessage()
       .then((res) => {
-        const data = res.content.filter((item) => {
-          return item.id === 3
-        })[0]
-        this.list = JSON.parse(data.context)
+        // const data = res.content.filter((item) => {
+        //   return item.id === 3
+        // })[0]
+        // this.list = JSON.parse(data.context)
         const img = res.content.filter((item) => {
           return item.id === 4
         })[0].context
@@ -130,7 +124,7 @@ export default {
     }
   }
   .form{
-    width:50%;
+    width:80%;
     /deep/.el-form-item__label{
       font-size:1.0rem;
       color:#000;

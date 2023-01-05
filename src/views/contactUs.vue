@@ -1,6 +1,9 @@
 <template>
       <div>
         <div class="cu-desc">
+          <div class="cu-right">
+            <img width="800px" src="https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg"/>
+          </div>
           <div class="cu-left">
             <div>
               <h2>对外合作</h2>
@@ -23,10 +26,7 @@
                   <div class="button" style="width:100px;">提交</div>
                 </el-form-item>
               </el-form>
-        </div>
-          </div>
-          <div class="cu-right">
-            <img width="800px" src="https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg"/>
+            </div>
           </div>
         </div>
 
@@ -58,9 +58,9 @@ export default {
       line-height:2;
       font-weight: bold;
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (max-width: 800px) {
     .cu-desc {
-      display: flex;
+      display: block;
         }
   }
   .cu-form{
@@ -72,6 +72,7 @@ export default {
     justify-content: space-between;
     padding-bottom: 40px;
     .cu-left{
+      order:-1;
       width: 100%;
       .desc-title{
         color: #956609;
