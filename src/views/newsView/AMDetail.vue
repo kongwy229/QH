@@ -4,15 +4,15 @@
         <div class="img">
           <img :src="info.previewImg" width="50%"/>
         </div>
-        <div>
+        <div v-show="info.content">
           <h3>年会简介</h3>
           <p>{{info.content}}</p>
         </div>
-        <div>
+        <div v-show="info.time">
           <h3>年会时间</h3>
           <p>{{info.time}}</p>
         </div>
-        <div>
+        <div v-show="info.agenda">
           <h3>会议议程</h3>
           <div class="editor-content-view" v-html="info.agenda">
           </div>
