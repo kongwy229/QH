@@ -56,13 +56,13 @@ module.exports = {
   // 去除生产环境的productionSourceMap
   productionSourceMap: false,
   configureWebpack: config => {
-   //配置别名
+    // 配置别名
     Object.assign(config.resolve, {
       alias: {
-          '@': path.resolve(__dirname, './src')
+        '@': path.resolve(__dirname, './src')
       }
-  })
-   // 为生产环境修改配置...
+    })
+    // 为生产环境修改配置...
     // 去除console.log打印以及注释
     const plugins = []
     if (isProduction) {

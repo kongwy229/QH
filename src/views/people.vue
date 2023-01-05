@@ -5,7 +5,7 @@
           <div class="container">
             <div v-for="p in item.people" :key="p.name" class="con" :class="{limit:item.people.length>1}">
                 <div>
-                  <img src="../../assets/img/default.png"/>
+                  <img src="../assets/img/default.png"/>
                 </div>
                 <div class="con-desc">
                     <h3>{{p.name}}</h3>

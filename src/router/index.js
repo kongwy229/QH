@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import index from '../views/newsView/index'
-import desc from '../views/newsView/desc'
+import index from '../views/index'
+import desc from '../views/desc'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,12 +22,12 @@ const routes = [
   {
     path: '/history',
     name: 'history',
-    component: () => import(/* webpackChunkName: "about" */ '../views/newsView/history.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/history.vue')
   },
   {
     path: '/people',
     name: 'people',
-    component: () => import(/* webpackChunkName: "people" */ '../views/newsView/people.vue')
+    component: () => import(/* webpackChunkName: "people" */ '../views/people.vue')
   },
   // {
   //   path: '/news/:id',
@@ -35,9 +35,14 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "newsDetail" */ '../views/web/newsDetail.vue')
   // },
   {
-    path: '/contactUs',
-    name: 'contactUs',
-    component: () => import(/* webpackChunkName: "contactUs" */ '../views/newsView/contactUs.vue')
+    path: '/hire',
+    name: 'hire',
+    component: () => import(/* webpackChunkName: "contactUs" */ '../views/hire.vue')
+  },
+  {
+    path: '/conUs',
+    name: 'conUs',
+    component: () => import(/* webpackChunkName: "contactUs" */ '../views/contactUs.vue')
   },
   // {
   //   path: '/signup',

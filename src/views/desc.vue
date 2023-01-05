@@ -2,7 +2,7 @@
       <div>
         <h2>质量与可靠性研究院简介</h2>
         <div class="img">
-          <img src="../../assets/img/start.jpg"/>
+          <img src="../assets/img/start.jpg"/>
         </div>
         <div v-for="item in info" :key="item.title">
           <h3>{{item.title}}</h3>

@@ -36,9 +36,12 @@
                 {{subItem.title}}
               </el-menu-item>
             </el-submenu>
-            <el-menu-item :index="navList[6].path">
-              {{navList[6].title}}
-            </el-menu-item>
+            <el-submenu :index="navList[6].path">
+              <template slot="title">{{navList[6].title}}</template>
+              <el-menu-item  v-for="(subItem) in navList[6].children" :key="subItem.path" :index="subItem.path">
+                {{subItem.title}}
+              </el-menu-item>
+            </el-submenu>
         </el-menu>
         </div>
       </div>
@@ -75,9 +78,12 @@
               {{subItem.title}}
             </el-menu-item>
           </el-submenu>
-          <el-menu-item :index="navList[6].path">
-            {{navList[6].title}} <span class="line"> / </span>
-          </el-menu-item>
+          <el-submenu :index="navList[6].path">
+              <template slot="title">{{navList[6].title}}</template>
+              <el-menu-item  v-for="(subItem) in navList[6].children" :key="subItem.path" :index="subItem.path">
+                {{subItem.title}}
+              </el-menu-item>
+            </el-submenu>
           <!-- <el-menu-item  v-for="item in navList" :key="item.path" :index="item.path">
             {{item.title}} <span class="line"> / </span>
           </el-menu-item> -->
@@ -226,7 +232,17 @@ export default {
         },
         {
           title: '加入我们',
-          path: 'contactUs'
+          path: 'contactUs',
+          children: [
+            {
+              title: '招聘信息',
+              path: 'hire'
+            },
+            {
+              title: '联系我们',
+              path: 'conUs'
+            }
+          ]
         }
       ],
       timeList: [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]
