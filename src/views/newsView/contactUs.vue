@@ -8,7 +8,7 @@
           <div class="cu-left">
             <div>
               <h2>地址信息</h2>
-              <div class="button">北京市海淀区双清路77号院1 </div>
+              <div class="button">北京市海淀区双清路77号院4号楼1102</div>
             </div>
             <div class="cu-form">
               <h2>联系我们</h2>

@@ -3,9 +3,9 @@
       <div class="container">
           <div class="left">
             <h2>清华大学质量与可靠性研究院相关公告</h2>
-            <el-carousel trigger="click">
-              <el-carousel-item v-for="item in carousels" :key="item.id">
-                <img height="100%" width="100%" :src="item.img" @click="jumpTo(item)"/>
+            <el-carousel trigger="click" :autoplay="false">
+              <el-carousel-item v-for="item in carousels" :key="item.id" style="text-align:center">
+                <img height="100%" :src="item.img" @click="jumpTo(item)"/>
               </el-carousel-item>
             </el-carousel>
             <p class="desc">
@@ -109,14 +109,14 @@ export default {
 .container{
   display: flex;
   .left{
-    width:80%;
+    width:70%;
     color:@dark_bgColor;
   }
   .ShowAll{
     width:100%;
   }
   .right{
-     width:20%;
+     width:30%;
       .title{
         color: @dark_bgColor;
         font-size:1.0rem;
