@@ -57,19 +57,15 @@ export default {
 @light_bgColor:#7e2a8a;
 @dark_bgColor:#46228e;
 @normal_titleColor:#d69909;
-  .desc {
-      width:100%;
-      color:#000;
-      font-size:1.2rem;
-      line-height:2;
-      font-weight: bold;
+  h2{
+    color:@dark_bgColor;
   }
   .cu-desc {
     margin-top: 20px;
     justify-content: space-between;
     padding-bottom: 40px;
       .desc-title{
-        color: #956609;
+        color: @dark_bgColor;
       }
     }
 

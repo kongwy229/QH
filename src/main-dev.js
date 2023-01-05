@@ -3,17 +3,15 @@ import App from './App.vue'
 import router from './router'
 // import store from './store'
 // import axios from './axios/index-dev'
-
+// import axios from 'axios';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css'
-import { mavonEditor } from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
 
 import './assets/style/common.css'
+import './assets/style/editor.css'
 import './assets/font/iconfont'
 // import animated from 'animate.css'
-import VueScrollTo from 'vue-scrollto'
 // 网站统计
 /* eslint-disable */
 // var _hmt = _hmt || []
@@ -27,23 +25,7 @@ import VueScrollTo from 'vue-scrollto'
 /* eslint-enable */
 
 Vue.use(ElementUI)
-// Vue.use(animated)
-Vue.use(VueScrollTo)
-Vue.component('mavon-editor', mavonEditor)
-// 默认选项
-Vue.use(VueScrollTo, {
-  container: 'body',
-  duration: 500,
-  easing: 'ease',
-  offset: 0,
-  force: true,
-  cancelable: true,
-  onStart: false,
-  onDone: false,
-  onCancel: false,
-  x: false,
-  y: true
-})
+
 // Vue.prototype.$http = axios
 Vue.config.productionTip = false
 

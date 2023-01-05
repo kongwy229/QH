@@ -27,8 +27,6 @@
           </div>
           <div class="cu-right">
             <img width="800px" src="https://www.tsinghua.edu.cn/__local/1/95/79/BE6722693B3BC46415290CC514C_60689166_C4100.jpg"/>
-            <hr/>
-            <img width="800px" src="https://www.tsinghua.edu.cn/__local/0/E9/B5/123588172AED93BD0193C0D83FA_DED4F3EB_901C6.jpg"/>
           </div>
         </div>
 

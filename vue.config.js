@@ -9,8 +9,7 @@ const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
-  'element-ui': 'ElementUI',
-  // 'mavon-editor': 'mavonEditor',
+  'element-ui': 'ELEMENT',
   axios: 'axios'
 }
 const cdn = {
@@ -43,7 +42,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://150.158.166.87:8000',
         // ws: true,
         changeOrigin: true
         // pathRewrite: {
@@ -103,7 +102,7 @@ module.exports = {
        */
       config.plugin('html').tap(args => {
         args[0].cdn = cdn.build
-        args[0].title = 'Xanadu'
+        args[0].title = '清华大学质量与可靠性研究院官网'
         return args
       })
       // 压缩图片
@@ -119,7 +118,7 @@ module.exports = {
       config.entry('app').clear().add('./src/main-dev.js')
       config.plugin('html').tap(args => {
         args[0].cdn = cdn.dev
-        args[0].title = 'Dev-Xanadu'
+        args[0].title = '质量与可靠性研究院官网'
         return args
       })
     })
