@@ -68,3 +68,8 @@ export const getAnnul = async (params) => {
 export const search = async (params) => {
   return await axios.get(`${baseUrl}web/search`, { withCredentials: true, params: params })
 }
+
+// 获取招聘数据
+export const getHireData = async () => {
+  return await axios.get(`${baseUrl}web/hire`, { withCredentials: true, params: { id: 1 } })
+}

@@ -6,7 +6,7 @@
         </div>
         <div v-for="item in info" :key="item.title">
           <h3>{{item.title}}</h3>
-          <p>{{item.content}}</p>
+          <div class="editor-content-view" v-html="item.content"></div>
         </div>
       </div>
 </template>

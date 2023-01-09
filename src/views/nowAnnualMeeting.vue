@@ -41,7 +41,7 @@
 <script>
 import { getAnnul, baseImgUrl } from '@/apis/index'
 export default {
-  name: 'desc',
+  name: 'nowAnnul',
   data () {
     return {
       info: {},

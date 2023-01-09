@@ -18,27 +18,11 @@ export default {
   data () {
     return {
       info: [
-        // {
-        //   title: '质量院成立',
-        //   time: '2014/9/30',
-        //   img: ''
-        // },
-        // {
-        //   title: '质量院成立',
-        //   time: '2014/10/3',
-        //   img: ''
-        // },
-        // {
-        //   title: '质量院成立',
-        //   time: '2014/2/1',
-        //   img: ''
-        // }
       ]
     }
   },
   mounted () {
     getDevelop().then((res) => {
-      console.log(res)
       res.forEach(item => {
         if (item.img) {
           item.img = baseImgUrl + item.img

@@ -7,22 +7,19 @@
             <h3 class="desc-title">合作导师</h3>
             <p>{{ newsList.expert }}</p>
             <h3 class="desc-title">聘用职务</h3>
-            <div style="margin-bottom:20px;" v-for="(item,index) in newsList.position" :key="index">
-              <span style="font-weight:bold">{{item.name}}({{ item.count }}名)</span>
-              <div v-html="item.content" style="line-height:1.5rem;"></div>
+            <div class="editor-content-view" v-html="newsList.position">
             </div>
-            <div>
-              <h3 class="desc-title">待遇</h3>
-              <div v-html="newsList.salary"></div>
-              <h3 class="desc-title">联系方式</h3>
-              <div v-html="newsList.contact"></div>
-            </div>
+            <h3 class="desc-title">待遇</h3>
+            <div>{{ newsList.salary }}</div>
+            <h3 class="desc-title">联系方式</h3>
+            <div >{{ newsList.contact }}</div>
         </div>
       </div>
 </template>
 <script>
+import { getHireData } from '@/apis/index'
 export default {
-  name: 'contactUs',
+  name: 'hire',
   data () {
     return {
       info: {
@@ -86,6 +83,11 @@ export default {
         contact: '<p>应聘者请于2022年12月31日之前提交个人详细简历，包括个人基本情况、教育背景、工作经历、曾参与的项目、曾获得奖励。</p><p>联系人：赵老师</p><p>邮箱地址：</p><p>zhaoxin1203@mail.tsinghua.edu.cn。</p>'
       }
     }
+  },
+  mounted () {
+    getHireData().then((res) => {
+      this.newsList = res.content[0]
+    })
   }
 }
 </script>

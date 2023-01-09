@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  name: 'desc',
+  name: 'research',
   data () {
     return {
       cate: {

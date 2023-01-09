@@ -32,7 +32,7 @@
 <script>
 import { getAnnul, baseImgUrl } from '@/apis/index'
 export default {
-  name: 'desc',
+  name: 'historyAM',
   data () {
     return {
       isMobile: false,
