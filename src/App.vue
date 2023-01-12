@@ -8,7 +8,7 @@
           导航
         </div>
         <div v-show="navShow">
-          <el-menu router :default-active="activeIndex" @select="handleSelect" text-color="#46228e">
+          <el-menu router :default-active="activeIndex" text-color="#46228e">
             <el-menu-item :index="navList[0].path">
               {{navList[0].title}}
             </el-menu-item>
@@ -56,7 +56,7 @@
         <!-- <h1>清华大学质量与可靠性研究院</h1> -->
       </div>
       <div class="nav" v-show="!isMobile">
-        <el-menu router :default-active="activeIndex" mode="horizontal" @select="handleSelect" text-color="#46228e">
+        <el-menu router :default-active="activeIndex" mode="horizontal" text-color="#46228e">
           <el-menu-item :index="navList[0].path">
             {{navList[0].title}} <span class="line"> / </span>
           </el-menu-item>
@@ -96,30 +96,22 @@
                 {{subItem.title}}
               </el-menu-item>
             </el-submenu>
-          <!-- <el-menu-item  v-for="item in navList" :key="item.path" :index="item.path">
-            {{item.title}} <span class="line"> / </span>
-          </el-menu-item> -->
-
-          <!-- <el-submenu v-for="item in navList" :key="item.path" :index="item.path">
-            <template slot="title">{{item.title}} <span class="line"> / </span></template>
-            <el-menu-item  v-for="(subItem,index) in item.children" :key="item.path + index" :index="item.path + index">
-              {{subItem}}
-            </el-menu-item>
-          </el-submenu> -->
-
         </el-menu>
         <div class="headerR-search">
-            <input placeholder="请输入关键词" v-model="text" @change="search"/>
-            <el-button type="primary" icon="el-icon-search" >搜索</el-button>
+            <input placeholder="请输入关键词" v-model="text"/>
+            <el-button type="primary" icon="el-icon-search" @click="searchText">搜索</el-button>
         </div>
       </div>
     </div>
     <div class="con">
-      <router-view v-show="text===''"></router-view>
-      <div v-show="text !== '' ">
+      <router-view v-show="!isSearch"></router-view>
+      <div v-show="isSearch">
+        <div class="headerR-search" style="justify-content:flex-end;">
+          <el-button type="primary" @click="cancelSearch">取消搜索</el-button>
+        </div>
         <ul class="searchList">
           <li v-for="item in list" :key="item.id">
-              <a :href="item.path"><i></i>{{item.title}}</a>
+              <a :href="item.path"><span></span>{{item.title}}</a>
           </li>
         </ul>
         <span v-show="list.length === 0"> 没有相关搜索结果</span>
@@ -131,12 +123,7 @@
         <img src="./assets/img/index/logoColor.png" width="150px"/>
       </div>
       <div class="left">
-        <!-- <div>
-          <a><img src="https://www.tsinghua.edu.cn/image/img56_2.png"/></a>
-          <a><img src="https://www.tsinghua.edu.cn/image/img56_1.png"/></a>
-          <a><img src="https://www.tsinghua.edu.cn/image/img56_4.png"/></a>
-        </div> -->
-        <p>Copyright © 2022-2022 清华大学质量与可靠性研究院 版权所有</p>
+        <p>Copyright © 2022-{{new Date().getFullYear()}} 清华大学质量与可靠性研究院 版权所有</p>
       </div>
     </div>
   </div>
@@ -156,7 +143,7 @@ export default {
         4: 'news',
         5: 'news/lecture',
         6: 'research/MQPR',
-        7: 'research/QMCT',
+        7: 'research/RQMCT',
         8: 'research/RASR',
         9: 'research/HFSR',
         10: 'research/ROSQ'
@@ -166,6 +153,7 @@ export default {
       navShow: false,
       isMobile: false,
       text: '',
+      isSearch: false,
       navList: [
         {
           title: '首页',
@@ -273,11 +261,12 @@ export default {
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
-      console.log(this.$router)
+    cancelSearch () {
+      this.list = []
+      this.text = ''
+      this.isSearch = false
     },
-    search () {
+    searchText () {
       if (this.text === '') return
       const params = {
         text: this.text,
@@ -288,7 +277,6 @@ export default {
       this.list = []
       search(params)
         .then(res => {
-          console.log(res)
           res.content.forEach(element => {
             if (element.type !== 'link') {
               if (element.type === 'annual') {
@@ -303,8 +291,8 @@ export default {
               })
             }
           })
-          console.log(this.list)
         })
+      this.isSearch = true
     },
     resizeFun () {
       const width = document.documentElement.clientWidth
@@ -479,17 +467,18 @@ export default {
     height: 40px;
     line-height: 40px;
     border-bottom: 1px dashed #cccccc;
-    i{
-        display: block;
+    color:#46228e;
+    span{
+        display: inline-block;
+        border-radius: 100%;
         width: 5px;
         height: 5px;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        z-index: 0;
-        margin-top: -2px;
-        background-color: #46228e;
+        margin-right:10px;
+        background-color: #7757b9;
     }
+  }
+  a:active{
+    color:#7757b9;
   }
 }
 </style>

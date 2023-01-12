@@ -1,5 +1,5 @@
 :root{
-    --hover_color: #3370ff;
+    --hover_color: #46228e;
 }
 /*!*html,*!*/
 /*!*body,*!*/
@@ -219,7 +219,7 @@ li {
 /* 滚动条滑块(竖向:vertical 横向:horizontal) */
 ::-webkit-scrollbar-thumb {
     cursor: pointer;
-    background-color: #28f;
+    background-color: #46228e;
     border-radius: 5px;
 }
 

@@ -27,6 +27,10 @@ export default {
         if (item.img) {
           item.img = baseImgUrl + item.img
         }
+        const date = item.time?.split(' ')[0]
+        const simpifyDate = date.split('-')
+        simpifyDate.pop()
+        item.time = simpifyDate.join('-')
         this.info.push(item)
       })
     })

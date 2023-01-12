@@ -9,7 +9,7 @@
             </div>
             <div class="desc">
               <p>{{item.content}}</p>
-               <p class="more" @click="jumpTo(item.id)">查看更多 <i class="el-icon-right"></i></p>
+               <p class="more" @click="jumpTo(item)">查看更多 <i class="el-icon-right"></i></p>
             </div>
           </div>
           <hr/>
@@ -66,12 +66,17 @@ export default {
             if (item.previewImg && item.previewImg.indexOf('http') === -1) {
               item.previewImg = baseImgUrl + item.previewImg
             }
+            item.updateTime = item.updateTime.split(' ')[0]
             this.newsList.push(item)
           })
         })
     },
-    jumpTo (id) {
-      this.$router.push({ name: 'AMDetail', params: { id: id } })
+    jumpTo (item) {
+      if (item.hyperLink) {
+        window.open(item.hyperLink.indexOf('http') === -1 ? `https://${item.hyperLink}` : item.hyperLink, '_blank')
+      } else {
+        this.$router.push({ name: 'AMDetail', params: { id: item.id } })
+      }
     }
   }
 }

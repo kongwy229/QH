@@ -17,7 +17,7 @@
             <div class="block" v-for="(item,index) in list" :key="index">
               <div class="title">{{item.title}}</div>
               <ul>
-                <li v-for="subItem in item.array" :key="subItem.id" @click="jumpTo(subItem)">
+                <li v-for="subItem in item.array" :key="subItem.id" @click="jumpTo(subItem)" :class="{higher: index===0 }">
                   <i></i> {{subItem.title}}
                 </li>
               </ul>
@@ -44,7 +44,7 @@ export default {
         4: 'news',
         5: 'news',
         6: 'research/MQPR',
-        7: 'research/QMCT',
+        7: 'research/RQMCT',
         8: 'research/RASR',
         9: 'research/HFSR',
         10: 'research/ROSQ'
@@ -161,10 +161,10 @@ export default {
         li{
             padding-left: 20px;
             /* width: 100%; */
-            height: 50px;
+            /* height: 50px; */
             cursor: pointer;
             line-height: 25px;
-            margin-top: 20px;
+            margin-top: 10px;
             color: #956609;
             display: -webkit-box;
             overflow: hidden;
@@ -176,6 +176,9 @@ export default {
         }
         li:hover{
           color:black;
+        }
+        .higher{
+          line-height: 2rem;
         }
       }
      }

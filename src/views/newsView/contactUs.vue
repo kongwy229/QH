@@ -8,7 +8,11 @@
           <div class="cu-left">
             <div>
               <h2>地址信息</h2>
-              <div class="button">北京市海淀区双清路77号院4号楼1102</div>
+              <div class="textButton">
+                <p>联系人：赵鑫</p>
+                <p>邮箱：zhaoxin1203@mail.tsinghua.edu.cn<p>
+                <p>地址：北京市海淀区双清路77号院4号楼1102</p>
+              </div>
             </div>
             <div class="cu-form">
               <h2>联系我们</h2>
@@ -130,6 +134,19 @@ export default {
       color:#000;
     }
   }
+  .textButton{
+    width: 70%;
+    padding:1rem;
+    font-size:0.8rem;
+    text-align: left;
+    background: @dark_bgColor;
+    color:#fff;
+    margin-top:10px;
+  }
+  .textButton:hover{
+    background:#7757b9;
+  }
+
   .button{
     width: 80%;
     min-height:40px;
@@ -139,6 +156,7 @@ export default {
     background: @dark_bgColor;
     color:#fff;
     margin-top:20px;
+    cursor: pointer;
   }
   .button:hover{
     background:#7757b9;

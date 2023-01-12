@@ -12,7 +12,6 @@
           <i class="el-icon-user"></i><span>{{form.author}}</span>
         </p>
         <div class="img">
-          <!-- <img :src="form.previewImg"/> -->
           <div class="editor-content-view content" v-html="form.content">
           </div>
         </div>

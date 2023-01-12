@@ -5,9 +5,8 @@
         <div class="limit-height" v-show="newsList.length > 0" v-loading="loading">
           <div class="news-con" v-for="item in newsList" :key="item.id">
             <h3 @click="jumpTo(item.id)">{{item.title}}</h3>
-            <p class="time">
-              <i class="el-icon-time"></i><span>{{item.updateTime}}</span>
-              <i class="el-icon-user"></i><span>{{item.author}}</span>
+            <p v-show="item.cooperate" class="time">
+              <span>合作单位：{{item.cooperate}}</span>
             </p>
             <div class="container">
               <div class="img">
@@ -101,6 +100,9 @@ export default {
   watch: {
     '$route.params.cate': function (v) {
       this.getList(this.cate[v].key)
+    },
+    '$route.params': function () {
+      this.handlePaginationChange()
     }
   },
   methods: {
