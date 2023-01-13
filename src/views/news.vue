@@ -49,26 +49,6 @@ export default {
         total: 0
       },
       cate: {
-        // policy: {
-        //   label: '质量相关政策',
-        //   key: 1
-        // },
-        // notice: {
-        //   label: '通知公告',
-        //   key: 2
-        // },
-        // forum: {
-        //   label: '地方座谈会',
-        //   key: 3
-        // },
-        // communication: {
-        //   label: '企业交流',
-        //   key: 4
-        // },
-        // lecture: {
-        //   label: '学术讲座',
-        //   key: 5
-        // },
         MQPR: {
           label: '宏观质量政策研究',
           key: 6
@@ -98,9 +78,6 @@ export default {
     this.handlePaginationChange()
   },
   watch: {
-    '$route.params.cate': function (v) {
-      this.getList(this.cate[v].key)
-    },
     '$route.params': function () {
       this.handlePaginationChange()
     }

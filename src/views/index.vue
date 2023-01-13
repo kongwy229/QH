@@ -17,7 +17,7 @@
             <div class="block" v-for="(item,index) in list" :key="index">
               <div class="title">{{item.title}}</div>
               <ul>
-                <li v-for="subItem in item.array" :key="subItem.id" @click="jumpTo(subItem)" :class="{higher: index===0 }">
+                <li v-for="subItem in item.array" :key="subItem.id" @click="jumpTo(subItem)" :class="{higher: index===1 }">
                   <i></i> {{subItem.title}}
                 </li>
               </ul>
@@ -53,17 +53,12 @@ export default {
       notice: '',
       list: [
         {
-          title: '成果',
+          title: '学术活动',
           array: []
         },
         {
-          title: '学术活动',
-          array: [
-            '国家质量政策与宏观治理体系',
-            '质量管理体系',
-            '质量控制与改进',
-            '企业六西格玛质量管理'
-          ]
+          title: '成果',
+          array: []
         }
       ],
       experts: [],

@@ -2,7 +2,7 @@
       <div>
         <div class="news-con" v-for="item in newsList" :key="item.id">
           <h3>{{item.title}}</h3>
-          <p class="time">{{item.updateTime}}</p>
+          <p class="time">{{item.time}}</p>
           <div class="container">
             <div class="img">
               <img :src="item.previewImg"/>

@@ -8,7 +8,7 @@
           导航
         </div>
         <div v-show="navShow">
-          <el-menu router :default-active="activeIndex" text-color="#46228e">
+          <el-menu router :default-active="activeIndex" text-color="#46228e" unique-opened @select="navShow = false">
             <el-menu-item :index="navList[0].path">
               {{navList[0].title}}
             </el-menu-item>
@@ -21,12 +21,6 @@
             <el-menu-item :index="navList[2].path">
               {{navList[2].title}}
             </el-menu-item>
-            <!-- <el-submenu :index="navList[3].path">
-              <template slot="title">{{navList[3].title}}</template>
-              <el-menu-item  v-for="(subItem) in navList[3].children" :key="subItem.path" :index="subItem.path">
-                {{subItem.title}}
-              </el-menu-item>
-            </el-submenu> -->
             <el-menu-item :index="navList[3].path">
               {{navList[3].title}}
             </el-menu-item>
@@ -245,15 +239,15 @@ export default {
         },
         {
           title: '加入我们',
-          path: 'contactUs',
+          path: '/contactUs',
           children: [
             {
               title: '招聘信息',
-              path: 'hire'
+              path: '/hire'
             },
             {
               title: '联系我们',
-              path: 'conUs'
+              path: '/conUs'
             }
           ]
         }
@@ -312,6 +306,9 @@ export default {
 }
 </script>
 <style>
+html{
+  background: #fff;
+}
 .editor-content-view img{
   max-width: 100%;
 }

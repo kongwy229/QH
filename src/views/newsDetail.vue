@@ -7,9 +7,8 @@
           新闻中心
         </h2>
         <h3>{{form.title}}</h3>
-        <p class="time">
-          <i class="el-icon-time"></i><span>{{form.time}}</span>
-          <i class="el-icon-user"></i><span>{{form.author}}</span>
+        <p v-show="form.cooperate" class="time">
+          <span>合作单位：{{form.cooperate}}</span>
         </p>
         <div class="img">
           <div class="editor-content-view content" v-html="form.content">
@@ -69,6 +68,7 @@ export default {
         title: '',
         time: '',
         content: '',
+        cooperate: '',
         author: '',
         id: '',
         previewImg: ''
@@ -76,7 +76,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.params.id)
     this.getList(this.$route.params.id)
   },
   watch: {
@@ -86,13 +85,13 @@ export default {
   },
   methods: {
     getList (id) {
-      console.log(id)
       this.form = {
         title: '',
         time: '',
         content: '',
         author: '',
         previewImg: '',
+        cooperate: '',
         id: id
       }
       getNewsList({ id: id })
@@ -103,6 +102,7 @@ export default {
             time: data.updateTime,
             content: data.content,
             author: data.author,
+            cooperate: data.cooperate,
             previewImg: data.previewImg && data.previewImg.indexOf('http') === -1 ? baseImgUrl + data.previewImg : data.previewImg,
             id: id
           }
